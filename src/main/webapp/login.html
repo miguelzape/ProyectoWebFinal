@@ -37,9 +37,9 @@
     <h2>Introduzca sus credenciales</h2>
 </fieldset>
 	<fieldset >
-	<form>
-		Usuario: <br><input type="text" required="true" maxlength="15" minlength="4"> <br> <br> 
-		Clave:<br> <input type="password" required="true" maxlength="15" minlength="4"> <br>
+	<form action="http://localhost:8081/proyectoWebFinal/src/main/java/servlets/LoginServlet" method="post">
+		Usuario: <br><input type="text" name="userCaja" required="true" maxlength="15" minlength="4"> <br> <br> 
+		Clave:<br> <input type="password" name="passwordCaja" required="true" maxlength="15" minlength="4"> <br>
         <br>
 		<br> <input type="submit" value="Aceptar">
 	</form>
@@ -47,3 +47,20 @@
     <a href="userdata.html">Crear un usuario nuevo</a>
 </body>
 </html>
+
+
+
+
+
+
+
+<!--<body>-->
+<!--	<h1>PAGINA DE ENLACE AL SERVLET</h1>-->
+<!--<a href="/ProyectoWebProfe/numeropar?numero=2">Enlace al servlet</a>-->
+<!--<br>-->
+<!--<form action="http://10.2.1.10:8081/ProyectoWebProfe/numeropar" method="post">-->
+<!--	Texto1: <input name="caja1" type="text"><br>-->
+<!--	Texto2: <input name="caja2" type="text"><br>-->
+<!--	<input type="submit" value="Enviar">	-->
+<!--</form>-->
+
