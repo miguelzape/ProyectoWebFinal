@@ -1,5 +1,66 @@
-<html>
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+<meta charset="utf-8">
+<title>Login</title>
+<script type="text/javascript">
+	function comprobar () {
+		var x = document.forms.myForm;
+		alert(x.action);
+	}
+</script>
+
+<style>
+/*	body{
+            background-image: url(./img/fondoMath.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }  
+        legend, p{
+            color: rgb(248, 219, 183);
+        }
+        img{
+            width: 40px;
+        }      
+*/      
+        fieldset{
+            background-color: cadetblue;
+            width: 20%;
+            border-radius: 3%;
+        }
+        
+</style>
+
+</head>
 <body>
-<h2>Hello World!</h2>
+</fieldset>
+    <h2>Introduzca sus credenciales</h2>
+</fieldset>
+	<fieldset >
+	<form action="http://localhost:8081/proyectoWebFinal/LoginServlet" method="post">
+		Usuario: <br><input type="text" name="userCaja" required="true" maxlength="15" minlength="4"> <br> <br> 
+		Clave:<br> <input type="password" name="passwordCaja" required="true" maxlength="15" minlength="4"> <br>
+        <br>
+		<br> <input type="submit" value="Aceptar">
+	</form>
+</fieldset>
+    <a href="userdata.html">Crear un usuario nuevo</a>
 </body>
 </html>
+
+
+
+
+
+
+
+<!--<body>-->
+<!--	<h1>PAGINA DE ENLACE AL SERVLET</h1>-->
+<!--<a href="/ProyectoWebProfe/numeropar?numero=2">Enlace al servlet</a>-->
+<!--<br>-->
+<!--<form action="http://10.2.1.10:8081/ProyectoWebProfe/numeropar" method="post">-->
+<!--	Texto1: <input name="caja1" type="text"><br>-->
+<!--	Texto2: <input name="caja2" type="text"><br>-->
+<!--	<input type="submit" value="Enviar">	-->
+<!--</form>-->
+

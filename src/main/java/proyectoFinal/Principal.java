@@ -2,13 +2,14 @@ package proyectoFinal;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.Properties;
 
+import proyectoFinal.Daos.RolDao;
 import proyectoFinal.Daos.UserDao;
 import proyectoFinal.entities.Rol;
 import proyectoFinal.entities.User;
+import proyectoFinal.utils.EnumColor;
 
 public class Principal {
 
@@ -26,6 +27,7 @@ public class Principal {
 		this.ReadProperties();
 
 		UserDao udao = new UserDao();
+		RolDao rdao = new RolDao();
 
 		Rol admin = new Rol("Administrador");
 		Rol oper = new Rol("Operador");
@@ -35,17 +37,26 @@ public class Principal {
 		User u2 = new User("user2", "clave2", "nombre2", "apellidos2", "dni2", "V", "user2@dominio.es", 916050002,
 				new Date(), oper);
 
+		rdao.putRol(admin);
+		rdao.putRol(oper);
 		udao.putUser(u1);
 		udao.putUser(u2);
 
-		for (User u : udao.getUsers()) {
-			System.out.println(u.getIdUsuario());
-		}
+//		for (User u : udao.getUsers()) {
+//			System.out.println("\n");
+//			System.out.println(u.getIdUsuario());
+//			System.out.println("\n");
+//		}
+		
+		boolean userValido = udao.existUsuario("user");
+		System.out.println(EnumColor.BLUE + "existe " + userValido);
+		System.out.println(EnumColor.WHITE+ "");
 
 		boolean r1 = udao.existUsuario("paco");
 		long r2 = udao.validarUser("user", "clave");
 
 		udao.close();
+		rdao.close();
 	}
 
 	void ReadProperties() {

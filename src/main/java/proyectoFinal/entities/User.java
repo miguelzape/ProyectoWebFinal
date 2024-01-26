@@ -27,7 +27,7 @@ public class User implements Serializable{
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private long idUsuario;
 	
-	@Column(length = 20, nullable=false) 
+	@Column(length = 20, nullable=false, unique=true) 
 	private String usuario;
 	@Column(length = 12, nullable=false) 
 	private byte[] clave;

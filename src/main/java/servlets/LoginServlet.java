@@ -38,10 +38,21 @@ public class LoginServlet extends HttpServlet {
 			String userCaja=request.getParameter("userCaja");
 			String passWordCaja=request.getParameter("passwordCaja");
 			UserDao udao= new UserDao();
-			boolean userValido = udao.existUsuario(userCaja);
-			System.out.println("Usuario= "+userCaja+ " clave "+passWordCaja+ " existe " + userValido);
+			long idEncontrado= udao.validarUser (userCaja, passWordCaja);
 			
-		
+			//boolean userValido = udao.existUsuario(userCaja);
+			//System.out.println("Usuario= "+userCaja+ " clave= "+passWordCaja+ " existe " + userValido);
+			//System.out.println("el id del usario es= " + idEncontrado);
+			
+			if (idEncontrado > 0) {
+				response.getWriter().append("<H1>Logeado correctamente. Su id es= "+idEncontrado+" </h1>");
+			}
+			else
+			{
+				response.getWriter().append("<H1>Credenciales no validas</h1>");
+			}
+			
+			udao.close();
 		}else {
 			response.getWriter().append("<H1>Se necesita usuario y clave</h1>");
 		}
