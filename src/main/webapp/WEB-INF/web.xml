@@ -5,13 +5,18 @@
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
   <servlet>
-  	<servlet-name>LoginServlet</servlet-name>  <!-- comentario -->
-  	<display-name>LoginServlet</display-name>	<!-- comentario -->
+  	<servlet-name>LoginServlet</servlet-name>  <!-- mismo nombre que se dio abajo (##1) -->
+  	<display-name>LoginServlet</display-name>	<!-- NO LE DAMOS USO. SE PUEDE BORRAR -->
   	<description></description>
-  	<servlet-class>servlets.LoginServlet</servlet-class> <!-- comentario -->
+  	<servlet-class>servlets.LoginServlet</servlet-class> <!-- clase java que debe ejecutarse -->
   </servlet>
+  
   <servlet-mapping>
-  	<servlet-name>LoginServlet</servlet-name> <!-- comentario -->
-  	<url-pattern>/LoginServlet</url-pattern> <!-- comentario -->
+  	<servlet-name>LoginServlet</servlet-name> <!-- nombre que le doy (##1) -->
+  	<url-pattern>/LoginServlet</url-pattern> <!-- el nombre con el que se llama desde url -->
   </servlet-mapping>
+  <!-- Puede existir otro servlet-mapping que apunte al mismo nombre (##1) -->
+  <!-- Pero ese nombre (##1) solo estara en una seccion de arriba. no duplicado-->
+  
+  
 </web-app>
