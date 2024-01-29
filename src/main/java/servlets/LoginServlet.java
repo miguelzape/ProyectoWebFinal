@@ -50,6 +50,7 @@ public class LoginServlet extends HttpServlet {
 			else
 			{
 				response.getWriter().append("<H1>Credenciales no validas</H1>");
+				//response.setContentType("text/html");
 			}
 			
 			udao.close();
