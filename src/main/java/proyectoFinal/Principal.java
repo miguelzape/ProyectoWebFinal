@@ -37,16 +37,11 @@ public class Principal {
 		User u2 = new User("user2", "clave2", "nombre2", "apellidos2", "dni2", "V", "user2@dominio.es", 916050002,
 				new Date(), oper);
 
-		rdao.putRol(admin);
-		rdao.putRol(oper);
-		udao.putUser(u1);
-		udao.putUser(u2);
+//		rdao.putRol(admin);
+//		rdao.putRol(oper);
+//		udao.putUser(u1);
+//		udao.putUser(u2);
 
-//		for (User u : udao.getUsers()) {
-//			System.out.println("\n");
-//			System.out.println(u.getIdUsuario());
-//			System.out.println("\n");
-//		}
 		
 		boolean userValido = udao.existUsuario("user");
 		System.out.println(EnumColor.BLUE + "existe " + userValido);

@@ -1,0 +1,78 @@
+H3{
+  font-family: Calibri; 
+  font-size: 25pt;         
+  font-style: normal; 
+  font-weight: bold; 
+  color:SlateBlue;
+  text-align: center; 
+  text-decoration: underline
+}
+
+H2{
+	font-family: 'Marketing Script', serif;
+	font-size: 47px;
+	text-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+	line-height: 0.4;
+	text-align: center;
+}
+
+H4{
+	font-size: 19px;
+	text-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+	font-weight: normal;
+	margin: 10px 0;
+	text-align: center;
+}
+
+table{
+  font-family: Calibri; 
+  color:white; 
+  font-size: 11pt; 
+  font-style: normal;
+  font-weight: bold;
+  text-align:center; 
+  background-color: SlateBlue; 
+  border-collapse: collapse; 
+  border: 2px solid navy
+}
+table.inner{
+  border: 0px
+}
+
+.input-box{
+	border-radius: 5px;
+	position: relative;
+	padding: 30px 50px;
+	border: 1px solid rgba(221, 221, 221, 0.8);
+	box-shadow: 0 5px 11px rgba(0, 0, 0, 0.2);
+	background: rgba(255, 255, 255, 0.8);
+	background: -moz-linear-gradient(bottom, rgba(221, 221, 221, 0.8) 0%, rgba(255, 255, 255, 0.8) 100%);
+	background: -webkit-linear-gradient(bottom, rgba(221, 221, 221, 0.8) 0%, rgba(255, 255, 255, 0.8) 100%);
+	background: linear-gradient(to top, rgba(221, 221, 221, 0.8) 0%, rgba(255, 255, 255, 0.8) 100%);
+}
+
+.input-box2{
+	width: 100%;
+	border: none;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.5);
+	border-radius: 5px;
+	background: rgba(255, 255, 255, 0.6);
+	font-size: 19px;
+	padding: 8px 12px;
+	color: rgba(0, 0, 0, 0.8);
+	font-weight: bold;
+}
+
+.bg-naranja{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	
+	background: #f17009;
+	background: -moz-linear-gradient(30deg, #f17009 0%, #ee620d 24%, #f19109 74%, #f17009 100%);
+	background: -webkit-linear-gradient(30deg, #f17009 0%, #ee620d 24%, #f19109 74%, #f17009 100%);
+	background: linear-gradient(60deg, #f17009 0%, #ee620d 24%, #f19109 74%, #f17009 100%);
+}
+

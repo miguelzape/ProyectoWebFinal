@@ -45,16 +45,16 @@ public class LoginServlet extends HttpServlet {
 			//System.out.println("el id del usario es= " + idEncontrado);
 			
 			if (idEncontrado > 0) {
-				response.getWriter().append("<H1>Logeado correctamente. Su id es= "+idEncontrado+" </h1>");
+				response.getWriter().append("<H1>Logeado correctamente</H1>");
 			}
 			else
 			{
-				response.getWriter().append("<H1>Credenciales no validas</h1>");
+				response.getWriter().append("<H1>Credenciales no validas</H1>");
 			}
 			
 			udao.close();
 		}else {
-			response.getWriter().append("<H1>Se necesita usuario y clave</h1>");
+			response.getWriter().append("<H1>Se necesita usuario y clave</H1>");
 		}
 	}
 

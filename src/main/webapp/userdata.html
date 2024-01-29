@@ -1,103 +1,75 @@
 <!DOCTYPE html>
 <html lang="es-ES">
-
 <head>
 	<meta charset="utf-8">
-	<title>Datos de usuario</title>
-	<link rel="stylesheet" href="estilos.css">
-
-	<style>
-		/*	body{
-            background-image: url(./img/fondoMath.jpg);
-            background-repeat: no-repeat;
-            background-size: cover;
-        }  
-        legend, p{
-            color: rgb(248, 219, 183);
-        }
-        img{
-            width: 40px;
-        }      
-*/
-
-		fieldset {
-			background-color: cadetblue;
-			width: 400px;
-			border-radius: 3%;
-		}
-	</style>
-
-	<script type="text/javascript">
-		function comprobaciones() {
-			p1 = document.getElementById("password1").value;
-			p2 = document.getElementById("password2").value;
-			if (p1 != p2){alert("La contraseña y su verificacion deben coincidir")}
-			
-			f = document.getElementById("fecha").value;
-			alert(f);	
-		}
-	</script>
-
+	<link rel="stylesheet" href="userdata.css">
+	<title>Datos de usuario</title
 </head>
-
 <body>
-	</fieldset>
-	<h1>Crear/Modificar usuario</h1>
-	</fieldset>
-	<br>
-	<fieldset>
-		<form>
-			<div id="contenedor">
-				<div class="etiquetas">
-					<p>Nombre:</p>
-					<p>Apellidos:</p>
-					<p>Dni:</p>
-					<p>Genero:</p>
-					<p>Usuario: </p>
-					<p>Contraseña: </p>
-					<p>Contraseña: </p>
-					<p>E-mail: </p>
-					<p>Telefono: </p>
-					<p>Fecha nacimiento: </p>
-					<p>Tipo:</p>
-					<br>
-				</div>
+    <div class="bg-amarillo">
+    <h3>Crear/Modificar usuario</h3>
 
-				<div class="controles">
-					<p><input type="text" id="nombre" maxlength="30" size="30"> </p>
-					<p><input type="text" id="apellidos" maxlength="30" size="30"> </p>
-					<p><input type="text" id="apellidos" maxlength="9" size="10"> </p>
-					<p><input type="text" id="genero" maxlength="1" size="2"> </p>
-					<p><input type="text" id="idusuario" required="true" maxlength="15" minlength="4"> </p>
-					<p><input type="password" id="password1" required="true" maxlength="15" minlength="4"> </p>
-					<p><input type="password" id="password2" required="true" maxlength="15" minlength="4"> verificación
-					</p>
-					<p><input type="email" id="mail" maxlength="30" size="30"></p>
-					<p><input type="number" id="telefono" telefono" maxlength="9" size="9"></p>
-					<p><input type="date" id="fecha" telefono" maxlength="9" size="9"></p>
-					<p><select name="tipo" id="tipo">
-							<option value="admin">administrador</option>
-							<option value="oper">usuario</option>
-						</select>
-					<p>
-					<br>
-				</div>
-				<br>
-
-			</div>
-
-			<div justify-content="center">
-				<br> <input type="submit" value="Aceptar">
-				<input type="button" value="Probar" onclick="comprobaciones()">
-			</div>
-
-
-
-		</form>
+	<form>
+	<table align="center" cellpadding = "10">
+	
 		
-		<a href="tablaUsers.html">Tabla de usuarios</a>
-	</fieldset>
-
+<!--		Letra: <input type="text" id="letra" required="true" name="letra" size="3" maxlength="1" autofocus>-->
+<!--		<input type="button" value="Probar" onclick="probar()">-->
+<!--		<br><br>-->
+<!--		<button type="reset" onclick="reiniciar()">Reiniciar</button>-->
+		
+		<tr>
+			<td>Nombre</td> 
+			<td><input type="text" name="nombre" maxlength="30" size="30"></td>
+		</tr>
+		<tr>
+			<td>Apellidos</td> 
+			<td><input type="text" name="apellidos" maxlength="30" size="30"></td>
+		</tr>
+		<tr>
+			<td>Dni</td> 
+			<td><input type="text" name="dni" maxlength="9" size="10"></td>
+		</tr>
+		<tr>
+			<td>Genero</td> 
+			<td>
+				<!-- input type="text" id="genero" maxlength="1" size="2"-->
+				Hombre <input type="radio" name="genero" value="Hombre" />
+				Mujer <input type="radio" name="genero" value="Mujer" />
+			</td>
+		</tr>
+		<tr>
+			<td>Usuario</td>
+			<td><input type="text" name="idusuario" required="true" maxlength="15" minlength="4"></td>
+		</tr>
+		<tr>
+			<td>Contraseña</td>
+			<td><input type="password" name="password" required="true" maxlength="15" minlength="4"></td>
+		</tr>
+		<tr>
+			<td>Contraseña</td> 
+			<td><input type="password" name="password2" required="true" maxlength="15" minlength="4"/> verificación </td>
+		</tr>
+		<tr>
+			<td>E-mail</td>
+			<td><input type="email" name="mail"  maxlength="30" size="30"></td>
+		</tr>
+		<tr>
+			<td>Telefono</td>
+			<td><input type="number" name="telefono" maxlength="9" size="11"></td>
+		</tr>
+		<tr>
+			<td>Fecha nacimiento</td> 
+			<td><input type="date" name="fecha" maxlength="9" size="10"></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><input type="submit" value="Aceptar"></td>
+		</tr>	
+	
+</table>
+</form>
+</div>
+    
 </body>
-
 </html>
