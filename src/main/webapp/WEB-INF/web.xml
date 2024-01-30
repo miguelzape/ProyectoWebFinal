@@ -10,10 +10,20 @@
   	<description></description>
   	<servlet-class>servlets.LoginServlet</servlet-class> <!-- clase java que debe ejecutarse -->
   </servlet>
+  <servlet>
+  	<servlet-name>UserDataServlet</servlet-name>
+  	<display-name>UserDataServlet</display-name>
+  	<description></description>
+  	<servlet-class>servlets.UserDataServlet</servlet-class>
+  </servlet>
   
   <servlet-mapping>
   	<servlet-name>LoginServlet</servlet-name> <!-- nombre que le doy (##1) -->
   	<url-pattern>/LoginServlet</url-pattern> <!-- el nombre con el que se llama desde url -->
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>UserDataServlet</servlet-name>
+  	<url-pattern>/UserDataServlet</url-pattern>
   </servlet-mapping>
   <!-- Puede existir otro servlet-mapping que apunte al mismo nombre (##1) -->
   <!-- Pero ese nombre (##1) solo estara en una seccion de arriba. no duplicado-->
