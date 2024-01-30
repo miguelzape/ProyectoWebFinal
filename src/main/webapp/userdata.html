@@ -3,13 +3,30 @@
 <head>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="userdata.css">
+	<script type="text/javascript">
+		
+		function validarForm() {
+ 		 
+ 		 let p1 = document.forms["formulario1"]["password"].value
+ 		 let p2 = document.forms["formulario1"]["password2"].value
+ 		 
+	     if (p1 == p2){
+			  return true
+		  }
+		  else{
+			  alert("La constraseña no coincide con su verificacion")
+	    	  return false
+		  }
+		} 
+		
+	</script>
 	<title>Datos de usuario</title
 </head>
 <body>
     <div class="bg-amarillo">
     <h3>Crear/Modificar usuario</h3>
 
-	<form>
+	<form name="formulario1" action="LoginServlet" onsubmit="return validarForm()" method="post">
 	<table align="center" cellpadding = "10">
 	
 		
