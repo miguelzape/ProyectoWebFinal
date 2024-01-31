@@ -37,51 +37,54 @@
 		
 		<tr>
 			<td>Nombre</td> 
-			<td><input type="text" name="nombre" maxlength="30" size="30"></td>
+			<td><input type="text" name="nombre" maxlength="30" size="30" tabindex="1" autofocus></td>
 		</tr>
 		<tr>
 			<td>Apellidos</td> 
-			<td><input type="text" name="apellidos" maxlength="30" size="30"></td>
+			<td><input type="text" name="apellidos" maxlength="30" size="30" tabindex="2"></td>
 		</tr>
 		<tr>
 			<td>Dni</td> 
-			<td><input type="text" name="dni" maxlength="9" size="10"></td>
+			<td><input type="text" name="dni" maxlength="9" size="10" tabindex="3"></td>
 		</tr>
 		<tr>
 			<td>Genero</td> 
 			<td>
 				<!-- input type="text" id="genero" maxlength="1" size="2"-->
-				Hombre <input type="radio" name="genero" value="Hombre" />
-				Mujer <input type="radio" name="genero" value="Mujer" />
+				Hombre <input type="radio" name="genero" value="Hombre" tabindex="4"/>
+				Mujer <input type="radio" name="genero" value="Mujer" tabindex="4"/>
 			</td>
 		</tr>
 		<tr>
 			<td>Usuario</td>
-			<td><input type="text" name="idusuario" required="true" maxlength="15" minlength="4"></td>
+			<td><input type="text" name="idusuario" required="true"
+			     maxlength="15" minlength="4" tabindex="5"></td>
 		</tr>
 		<tr>
 			<td>Contraseña</td>
-			<td><input type="password" name="password" required="true" maxlength="15" minlength="4"></td>
+			<td><input type="password" name="password" required="true"
+			     maxlength="15" minlength="4" tabindex="6"></td>
 		</tr>
 		<tr>
 			<td>Contraseña</td> 
-			<td><input type="password" name="password2" required="true" maxlength="15" minlength="4"/> verificación </td>
+			<td><input type="password" name="password2" required="true"
+			     maxlength="15" minlength="4" tabindex="7"/> verificación </td>
 		</tr>
 		<tr>
 			<td>E-mail</td>
-			<td><input type="email" name="mail"  maxlength="30" size="30"></td>
+			<td><input type="email" name="mail"  maxlength="30" size="30" tabindex="8"></td>
 		</tr>
 		<tr>
 			<td>Telefono</td>
-			<td><input type="number" name="telefono" maxlength="9" size="11" ></td>
+			<td><input type="tel" name="telefono" maxlength="9" size="11" tabindex="9"></td>
 		</tr>
 		<tr>
 			<td>Fecha nacimiento</td> 
-			<td><input type="date" name="fecha" maxlength="9" size="10"></td>
+			<td><input type="date" name="fecha" maxlength="9" size="10" tabindex="10"></td>
 		</tr>
 		<tr>
 			<td></td>
-			<td><input type="submit" value="Aceptar"></td>
+			<td><input type="submit" value="Aceptar" tabindex="11"></td>
 		</tr>	
 	
 </table>
