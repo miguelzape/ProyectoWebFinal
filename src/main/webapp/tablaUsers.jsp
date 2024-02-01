@@ -28,15 +28,9 @@
 
 function modificar(List<User> usuarios){
 	let g = document.getElementById("genero").value
-	//let indice = 
-	request.setAttribute("Usuario", udao.);
-	RequestDispatcher rd = request.getRequestDispatcher("tablaUsers.jsp");
-	rd.forward(request, response);
 }
 
-
 </script>
-
 
 </head>
 <body>
