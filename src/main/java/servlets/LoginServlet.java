@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -45,12 +46,18 @@ public class LoginServlet extends HttpServlet {
 			//System.out.println("el id del usario es= " + idEncontrado);
 			
 			if (idEncontrado > 0) {
-				response.getWriter().append("<H1>Logeado correctamente</H1>");
+				//response.getWriter().append("<H1>Logeado correctamente</H1>");
+	
+				request.setAttribute("listaUsuarios", udao.getUsers());
+				RequestDispatcher rd = request.getRequestDispatcher("tablaUsers.jsp");
+				rd.forward(request, response);
 			}
 			else
 			{
+				//response.getWriter().append("<H1>Credenciales no validas</H1>");
 				response.getWriter().append("<H1>Credenciales no validas</H1>");
 				//response.setContentType("text/html");
+				//response.getWriter().append("index.html");
 			}
 			
 			udao.close();

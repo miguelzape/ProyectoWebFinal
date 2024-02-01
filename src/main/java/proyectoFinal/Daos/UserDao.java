@@ -28,12 +28,7 @@ public class UserDao {
 	
 
 	public List<User> getUsers (){
-		List<User> users;
-		
-		users = em.createQuery("from User", User.class)
-			.getResultList();
-		
-		return users;
+		return em.createQuery("from User", User.class).getResultList();
 	}
 	
 	
@@ -71,6 +66,7 @@ public class UserDao {
 		query.setParameter(1, usuario);
 		return query.getResultList();
 	}
+	
 	
 	public boolean existUsuario (String usuario){
 		
