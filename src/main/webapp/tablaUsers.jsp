@@ -65,7 +65,7 @@ for (User u: usuarios) {
 			<td><%=u.getEmail()%></td>
 			<td><%=u.getTelefono()%></td>
 			<td><%=fechaStr%></td>
-			<td><%=u.getRol().getTipo()%></td>	
+			<td><%=u.getRol()%></td>	
 		</tr>		
 			<%indice++;} 
 			
@@ -84,9 +84,9 @@ for (User u: usuarios) {
 			&dni=<%=u.getDni()%>
 			&genero=<%=u.getSexo()%>
 			&mail=<%=u.getEmail()%>
-			&telefono=<%=u.getTelefono().toString()%>
+			&telefono=<%=u.getTelefono()%>
     		&nacimiento=<%=u.getNacimiento().toGMTString()%>   
-			&rol=<%=u.getRol().getTipo()%>
+			&rol=<%=u.getRol()%>
 			&clave=<%=u.getClave()%>
 			&id=<%=u.getIdUsuario()%>">Enviar</a></td>
 		</tr>

@@ -47,7 +47,8 @@ public class User implements Serializable{
 //    @JoinColumn(name="idUser")
 //	private List<Rol> roles = new ArrayList<Rol>();
 	
-	private Rol rol;
+	@Column(length = 13) 
+	private String rol;
 	
 	
 	//Constructor vacio
@@ -57,7 +58,7 @@ public class User implements Serializable{
 	
 	//Constructor con todos los parametros
 	public User(String usuario, String clave, String nombre, String apellidos, String dni, String sexo, String email,
-			long telefono, Date nacimiento,Rol rol) {
+			long telefono, Date nacimiento,String rol) {
 		super();
 		this.usuario = usuario;
 		this.clave = clave.getBytes();
@@ -71,16 +72,9 @@ public class User implements Serializable{
 		this.rol = rol;
 	}
 	
-/*	//añadir un rol nuevo a la lista de roles
-	public void addRol(Rol rol) {
-		this.roles.add(rol);
-	}*/
-	
-	
 
 	//Metodos Get y Set
-	
-	
+
 	public String getUsuario() {
 		return usuario;
 	}
@@ -144,21 +138,13 @@ public class User implements Serializable{
 		return idUsuario;
 	}
 	
-	public Rol getRol() {
+	public String getRol() {
 		return rol;
 	}
 
-	public void setRol(Rol rol) {
+	public void setRol(String rol) {
 		this.rol = rol;
 	}
-
-//	public List<Rol> getRoles() {
-//		return roles;
-//	}
-//
-//	public void setRoles(List<Rol> roles) {
-//		this.roles = roles;
-//	}
 
 	//metodo toString
 	@Override

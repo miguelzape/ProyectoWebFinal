@@ -27,15 +27,15 @@ public class Principal {
 		this.ReadProperties();
 
 		UserDao udao = new UserDao();
-		RolDao rdao = new RolDao();
+		//RolDao rdao = new RolDao();
 
-		Rol admin = new Rol("Administrador");
-		Rol oper = new Rol("Operador");
+		//Rol admin = new Rol("Administrador");
+		//Rol oper = new Rol("Operador");
 
 		User u1 = new User("user", "clave", "nombre", "apellidos", "dni", "V", "user@dominio.es", 916050000, new Date(),
-				admin);
+				"admin");
 		User u2 = new User("user2", "clave2", "nombre2", "apellidos2", "dni2", "V", "user2@dominio.es", 916050002,
-				new Date(), oper);
+				new Date(), "user");
 
 //		rdao.putRol(admin);
 //		rdao.putRol(oper);
@@ -51,7 +51,7 @@ public class Principal {
 		long r2 = udao.validarUser("user", "clave");
 
 		udao.close();
-		rdao.close();
+		//rdao.close();
 	}
 
 	void ReadProperties() {

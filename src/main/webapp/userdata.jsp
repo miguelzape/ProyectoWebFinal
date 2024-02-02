@@ -30,7 +30,7 @@
 	   String p_nomb = request.getParameter("nombre");
 	   String p_apel = request.getParameter("apellidos");
 	   String p_dni = request.getParameter("dni");
-	String p_gene = request.getParameter("genero");
+	   String p_gene = request.getParameter("genero");
 	   String p_mail = request.getParameter("mail");
 	   long p_tele =  Long.parseLong(request.getParameter("telefono"));
 	String p_naci = request.getParameter("nacimiento");
