@@ -1,3 +1,4 @@
+<%@page import="org.hibernate.internal.build.AllowSysOut"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="java.util.List" import="java.text.SimpleDateFormat" 
@@ -24,13 +25,7 @@
         }
 </style>
 
-<script type="text/javascript">
 
-function modificar(List<User> usuarios){
-	let g = document.getElementById("genero").value
-}
-
-</script>
 
 </head>
 <body>
@@ -51,14 +46,15 @@ function modificar(List<User> usuarios){
 		</tr>
 		
 <% 
-String fecha=request.getParameter("listaUsuarios"); 
+
 List<User> usuarios = (List<User>)request.getAttribute("listaUsuarios");
-usuarios.get(1).getRol().getTipo();
+//usuarios.get(1).getApellidos();
 int indice=0;
 for (User u: usuarios) {
 	SimpleDateFormat df = new SimpleDateFormat("dd MMMM yyyy");
     String fechaStr = df.format(u.getNacimiento());
 %>
+
 		<tr>
 			<td><input type="radio" name="genero" id="genero" value="<%=indice%>"/></td>
 			<td><%=u.getUsuario()%></td>
@@ -71,11 +67,28 @@ for (User u: usuarios) {
 			<td><%=fechaStr%></td>
 			<td><%=u.getRol().getTipo()%></td>	
 		</tr>		
-			<%indice++;} %>
+			<%indice++;} 
+			
+			User u=usuarios.get(1);%>
 		<tr>
 			<td></td>
 			
-			<td><button onclick="modificar(<%=usuarios%>)">Modificar</button></td>
+			<td><button  onclick="<%
+//  		request.setAttribute("Usuario", usuarios.get(1));
+//  		RequestDispatcher rd = request.getRequestDispatcher("userdata.jsp");
+//  		rd.forward(request, response);
+			%>">Modificar</button></td>
+			<td><a href="userdata.jsp?usuario=<%=u.getUsuario()%>
+			&nombre=<%=u.getNombre()%>
+			&apellidos=<%=u.getApellidos()%>
+			&dni=<%=u.getDni()%>
+			&genero=<%=u.getSexo()%>
+			&mail=<%=u.getEmail()%>
+			&telefono=<%=u.getTelefono().toString()%>
+    		&nacimiento=<%=u.getNacimiento().toGMTString()%>   
+			&rol=<%=u.getRol().getTipo()%>
+			&clave=<%=u.getClave()%>
+			&id=<%=u.getIdUsuario()%>">Enviar</a></td>
 		</tr>
 	</table>
 </body>

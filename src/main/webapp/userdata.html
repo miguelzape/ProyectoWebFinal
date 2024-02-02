@@ -6,6 +6,8 @@
 	<script type="text/javascript">
 		
 		function validarForm() {
+			
+		
  		 
  		 let p1 = document.forms["formulario1"]["password"].value
  		 let p2 = document.forms["formulario1"]["password2"].value
@@ -19,10 +21,18 @@
 		  }
 		} 
 		
+		function cogerUsuario(){
+			
+			//int numero =	Integer.parseInt(request.getParameter("numero"));
+			
+			user =	request.getParameter("usuario");
+			document.getElementById("usuario").value = user;
+		}
+		
 	</script>
 	<title>Datos de usuario</title
 </head>
-<body>
+<body onload="cogerUsuario();">
     <div class="bg-amarillo">
     <h3>Crear/Modificar usuario</h3>
 
@@ -57,7 +67,7 @@
 		</tr>
 		<tr>
 			<td>Usuario</td>
-			<td><input type="text" name="idusuario" required="true"
+			<td><input type="text" name="usuario" required="true"
 			     maxlength="15" minlength="4" tabindex="5"></td>
 		</tr>
 		<tr>
