@@ -26,6 +26,9 @@
 </style>
 
 
+
+
+
 </head>
 <body>
 
@@ -55,20 +58,7 @@ for (User u: usuarios) {
 %>
 
 		<tr>
-			<td><a href="userdata.jsp?usuario=
-			<%=u.getUsuario()%>
-			&nombre=<%=u.getNombre()%>
-			&apellidos=<%=u.getApellidos()%>
-			&dni=<%=u.getDni()%>
-			&genero=<%=u.getSexo()%>
-			&mail=<%=u.getEmail()%>
-			&telefono=<%=u.getTelefono()%>
-    		&nacimiento=<%=Utils.dateToString(u.getNacimiento())%>   
-			&rol=<%=u.getRol()%>
-			<%String claveString = new String(u.getClave());%>
-			&clave=<%=claveString%>
-			&id=<%=u.getIdUsuario()%>">Editar</a></td>  
-
+			<td><input type="radio" name="genero" id="genero" value="<%=indice%>"/></td>
 			<td><%=u.getUsuario()%></td>
 			<td><%=u.getNombre()%></td>
 			<td><%=u.getApellidos()%></td>
@@ -80,7 +70,29 @@ for (User u: usuarios) {
 			<td><%=u.getRol()%></td>	
 		</tr>		
 			<%indice++;}%>
-		
+		<tr>
+			<td></td>
+			
+			<td><button  onclick="<%
+			User u=usuarios.get(1);
+			//let p2 = document.getElementById("genero").value;
+//  		request.setAttribute("Usuario", usuarios.get(1));
+//  		RequestDispatcher rd = request.getRequestDispatcher("userdata.jsp");
+//  		rd.forward(request, response);
+			%>">Modificar</button></td>
+			<td><a href="userdata.jsp?usuario=<%=u.getUsuario()%>
+			&nombre=<%=u.getNombre()%>
+			&apellidos=<%=u.getApellidos()%>
+			&dni=<%=u.getDni()%>
+			&genero=<%=u.getSexo()%>
+			&mail=<%=u.getEmail()%>
+			&telefono=<%=u.getTelefono()%>
+    		&nacimiento=<%=Utils.dateToString(u.getNacimiento())%>   
+			&rol=<%=u.getRol()%>
+			<%String claveString = new String(u.getClave());%>
+			&clave=<%=claveString%>
+			&id=<%=u.getIdUsuario()%>">Enviar</a></td>  
+		</tr>
 	</table>
 </body>
 </html>
