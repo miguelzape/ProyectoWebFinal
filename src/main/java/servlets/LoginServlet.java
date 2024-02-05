@@ -58,9 +58,8 @@ public class LoginServlet extends HttpServlet {
 			else
 			{
 				//response.getWriter().append("<H1>Credenciales no validas</H1>");
-				response.getWriter().append("<H1>Credenciales no validas</H1>");
-				//response.setContentType("text/html");
-				//response.getWriter().append("index.html");
+				RequestDispatcher rd = request.getRequestDispatcher("index.html");
+				rd.forward(request, response);
 			}
 			
 			udao.close();
