@@ -1,8 +1,8 @@
 <%@page import="org.hibernate.internal.build.AllowSysOut"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="java.util.List" import="java.text.SimpleDateFormat" 
-    import="proyectoFinal.entities.User" import="proyectoFinal.entities.Rol"%>
+    pageEncoding="ISO-8859-1" import="java.util.List, java.text.SimpleDateFormat" 
+    import="proyectoFinal.entities.User, proyectoFinal.entities.Rol ,proyectoFinal.utils.Utils"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,6 +24,8 @@
             border-radius: 3%;
         }
 </style>
+
+
 
 
 
@@ -51,8 +53,8 @@ List<User> usuarios = (List<User>)request.getAttribute("listaUsuarios");
 //usuarios.get(1).getApellidos();
 int indice=0;
 for (User u: usuarios) {
-	SimpleDateFormat df = new SimpleDateFormat("dd MMMM yyyy");
-    String fechaStr = df.format(u.getNacimiento());
+	SimpleDateFormat df = new SimpleDateFormat("dd-MMMM-yyyy");
+    String fechaStr1 = df.format(u.getNacimiento());
 %>
 
 		<tr>
@@ -64,16 +66,16 @@ for (User u: usuarios) {
 			<td><%=u.getSexo()%></td>
 			<td><%=u.getEmail()%></td>
 			<td><%=u.getTelefono()%></td>
-			<td><%=fechaStr%></td>
+			<td><%=fechaStr1%></td>
 			<td><%=u.getRol()%></td>	
 		</tr>		
-			<%indice++;} 
-			
-			User u=usuarios.get(1);%>
+			<%indice++;}%>
 		<tr>
 			<td></td>
 			
 			<td><button  onclick="<%
+			User u=usuarios.get(1);
+			//let p2 = document.getElementById("genero").value;
 //  		request.setAttribute("Usuario", usuarios.get(1));
 //  		RequestDispatcher rd = request.getRequestDispatcher("userdata.jsp");
 //  		rd.forward(request, response);
@@ -85,10 +87,11 @@ for (User u: usuarios) {
 			&genero=<%=u.getSexo()%>
 			&mail=<%=u.getEmail()%>
 			&telefono=<%=u.getTelefono()%>
-    		&nacimiento=<%=u.getNacimiento().toGMTString()%>   
+    		&nacimiento=<%=Utils.dateToString(u.getNacimiento())%>   
 			&rol=<%=u.getRol()%>
-			&clave=<%=u.getClave()%>
-			&id=<%=u.getIdUsuario()%>">Enviar</a></td>
+			<%String claveString = new String(u.getClave());%>
+			&clave=<%=claveString%>
+			&id=<%=u.getIdUsuario()%>">Enviar</a></td>  
 		</tr>
 	</table>
 </body>

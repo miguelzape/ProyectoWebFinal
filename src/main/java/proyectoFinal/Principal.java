@@ -39,8 +39,8 @@ public class Principal {
 
 //		rdao.putRol(admin);
 //		rdao.putRol(oper);
-//		udao.putUser(u1);
-//		udao.putUser(u2);
+		udao.putUser(u1);
+		udao.putUser(u2);
 
 		
 		boolean userValido = udao.existUsuario("user");

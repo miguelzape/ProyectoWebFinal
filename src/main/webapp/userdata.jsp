@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="java.util.List"%>
+    pageEncoding="ISO-8859-1" import="java.util.List, proyectoFinal.utils.Utils, java.util.Date"%>
 <!DOCTYPE html>
 <html lang="es-ES">
 <head>
@@ -32,14 +32,15 @@
 	   String p_dni = request.getParameter("dni");
 	   String p_gene = request.getParameter("genero");
 	   String p_mail = request.getParameter("mail");
-	   long p_tele =  Long.parseLong(request.getParameter("telefono"));
+	   String s_tele = request.getParameter("telefono");
+	   long p_tele =  Long.parseLong(s_tele.trim());
 	String p_naci = request.getParameter("nacimiento");
+	//Date d_naci = Utils.stringToDate(p_naci);
+	String p_naci2 = Utils.dateEspToEng(p_naci);
 	   String p_clav = request.getParameter("clave");
 	String p_rol = request.getParameter("rol");
 	String p_id = request.getParameter("id");
-	
-	
-	
+
 %>
 
     <div class="bg-amarillo">
@@ -108,7 +109,7 @@
 		<tr>
 			<td>Fecha nacimiento</td> 
 			<td><input type="date" name="fecha" maxlength="9" size="10" 
-			tabindex="10" value="<%=p_mail%>"></td>
+			tabindex="10" value="<%=p_naci2%>"></td>
 		</tr>
 		<tr>
 			<td></td>

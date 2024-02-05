@@ -7,6 +7,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import proyectoFinal.Daos.UserDao;
 
 /**
@@ -35,6 +36,8 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		HttpSession sesion = request.getSession();
+		//System.out.println(sesion.getId());
 		if (request.getParameter("userCaja")!=null && request.getParameter("passwordCaja")!=null) {
 			String userCaja=request.getParameter("userCaja");
 			String passWordCaja=request.getParameter("passwordCaja");
