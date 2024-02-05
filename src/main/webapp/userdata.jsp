@@ -26,25 +26,34 @@
 </head>
 <body>
 <%
+	   
 	   String p_user = request.getParameter("usuario");
-	   String p_nomb = request.getParameter("nombre");
-	   String p_apel = request.getParameter("apellidos");
-	   String p_dni = request.getParameter("dni");
-	   String p_gene = request.getParameter("genero");
-	   String p_mail = request.getParameter("mail");
+	   boolean tipo = (p_user != null && p_user.length() > 3); // true= modificar false=crear
+	   p_user = request.getParameter("usuario") != null ? request.getParameter("usuario"):"";
+	   String p_nomb = request.getParameter("nombre") != null ? request.getParameter("nombre"):"";
+	   String p_apel = request.getParameter("apellidos") != null ? request.getParameter("apellidos"):"";
+	   String p_dni = request.getParameter("dni") != null ? request.getParameter("dni"):"";
+	   String p_gene = request.getParameter("genero")!= null ? request.getParameter("genero"):"";
+	   String p_mail = request.getParameter("mail") != null ? request.getParameter("mail"):"";
 	   String s_tele = request.getParameter("telefono");
-	   long p_tele =  Long.parseLong(s_tele.trim());
-	String p_naci = request.getParameter("nacimiento");
-	//Date d_naci = Utils.stringToDate(p_naci);
-	String p_naci2 = Utils.dateEspToEng(p_naci);
-	   String p_clav = request.getParameter("clave");
-	String p_rol = request.getParameter("rol");
-	String p_id = request.getParameter("id");
+	   long p_tele = (s_tele != null) ? Long.parseLong(s_tele.trim()) : 0;
+	   String p_naci = request.getParameter("nacimiento");
+	   //Date d_naci = Utils.stringToDate(p_naci);
+	   String p_naci2 = (p_naci != null) ?  Utils.dateEspToEng(p_naci) : p_naci;
+	
+	   String p_clav = request.getParameter("clave") != null?request.getParameter("clave"):"";
+	   String p_rol = request.getParameter("rol") != null?request.getParameter("rol"):"";
+	   String p_id = request.getParameter("id");
 
 %>
 
     <div class="bg-amarillo">
-    <h3>Crear/Modificar usuario</h3>
+    
+    <%if (tipo){ %>
+    	<h3>Modificar usuario</h3>
+    <%}else{ %>
+    	<h3>Crear usuario</h3>
+    <%}%>
 
 	<form name="formulario1" action="UserDataServlet" onsubmit="return validarForm()" method="post">
 	<table align="center" cellpadding = "10">

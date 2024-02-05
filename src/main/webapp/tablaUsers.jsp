@@ -55,19 +55,18 @@ for (User u: usuarios) {
 %>
 
 		<tr>
-			<td><a href="userdata.jsp?usuario=
-			<%=u.getUsuario()%>
-			&nombre=<%=u.getNombre()%>
-			&apellidos=<%=u.getApellidos()%>
-			&dni=<%=u.getDni()%>
-			&genero=<%=u.getSexo()%>
-			&mail=<%=u.getEmail()%>
-			&telefono=<%=u.getTelefono()%>
-    		&nacimiento=<%=Utils.dateToString(u.getNacimiento())%>   
-			&rol=<%=u.getRol()%>
-			<%String claveString = new String(u.getClave());%>
-			&clave=<%=claveString%>
-			&id=<%=u.getIdUsuario()%>">Editar</a></td>  
+				<td><a href="userdata.jsp?usuario=<%=u.getUsuario()%>
+				&nombre=<%=u.getNombre()%>
+				&apellidos=<%=u.getApellidos()%>
+				&dni=<%=u.getDni()%>
+				&genero=<%=u.getSexo()%>
+				&mail=<%=u.getEmail()%>
+				&telefono=<%=u.getTelefono()%>
+	    		&nacimiento=<%=Utils.dateToString(u.getNacimiento())%>   
+				&rol=<%=u.getRol()%>
+				<%String claveString = new String(u.getClave());%>
+				&clave=<%=claveString%>
+				&id=<%=u.getIdUsuario()%>">Editar</a></td>  
 
 			<td><%=u.getUsuario()%></td>
 			<td><%=u.getNombre()%></td>
