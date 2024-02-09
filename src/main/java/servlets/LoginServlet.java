@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.Date;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletConfig;
@@ -10,7 +11,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import proyectoFinal.Daos.UserDao;
+import proyectoFinal.entities.User;
 import proyectoFinal.utils.Propiedades;
+import proyectoFinal.utils.Utils;
 
 /**
  * Servlet implementation class LoginServlet
@@ -87,17 +90,37 @@ public class LoginServlet extends HttpServlet {
 
 	
 	
-	private void nuevo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{	
+	private void nuevo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+				
+				
 	String nombre=request.getParameter("nombre");
 	String apellidos=request.getParameter("apellidos");
 	String dni=request.getParameter("dni");
 	String genero=request.getParameter("genero");
 	String idusuario=request.getParameter("idusuario");
-	String password=request.getParameter("password");
+	String clave=request.getParameter("password");
 	String mail=request.getParameter("mail");
 	String telefono=request.getParameter("telefono");
+	long tele = Long.parseLong(telefono);
 	String fecha=request.getParameter("fecha");
-	response.getWriter().append("<H1>"+nombre+apellidos+dni+genero+idusuario+password+mail+telefono+fecha+"</H1>");
+	// 1985-01-03 año-mes-dia. asi se recibe
+	System.out.println("la fecha recibida es= "+fecha);
+	Date f=Utils.string2ToDate(fecha);
+	
+	response.getWriter().append("<H1>"+nombre+apellidos+dni+genero+idusuario+clave+mail+telefono+fecha+"</H1>");
+	
+	User usuario = new User(idusuario,clave,nombre,apellidos,dni,genero,mail,tele,f,"rol");
+	
+	UserDao udao= new UserDao();
+	udao.putUser(usuario);
+	
+	request.setAttribute("listaUsuarios", udao.getUsers());
+	RequestDispatcher rd = request.getRequestDispatcher("tablaUsers.jsp");
+	rd.forward(request, response);
+	
+	udao.close();
+	
+
 	}
 	
 	
