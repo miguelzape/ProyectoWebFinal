@@ -46,6 +46,9 @@ public class LoginServlet extends HttpServlet {
 		else if (accion.equalsIgnoreCase("login")) {
 			login (request, response);
 		}
+		else if (accion.equalsIgnoreCase("nuevo")) {
+			nuevo (request, response);
+		}
 			
 		
 	}
@@ -71,7 +74,7 @@ public class LoginServlet extends HttpServlet {
 			else
 			{
 				//response.getWriter().append("<H1>Credenciales no validas</H1>");
-				RequestDispatcher rd = request.getRequestDispatcher("index.html");
+				RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
 				rd.forward(request, response);
 			}
 			
@@ -82,6 +85,24 @@ public class LoginServlet extends HttpServlet {
 		
 	}
 
+	
+	
+	private void nuevo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{	
+	String nombre=request.getParameter("nombre");
+	String apellidos=request.getParameter("apellidos");
+	String dni=request.getParameter("dni");
+	String genero=request.getParameter("genero");
+	String idusuario=request.getParameter("idusuario");
+	String password=request.getParameter("password");
+	String mail=request.getParameter("mail");
+	String telefono=request.getParameter("telefono");
+	String fecha=request.getParameter("fecha");
+	response.getWriter().append("<H1>"+nombre+apellidos+dni+genero+idusuario+password+mail+telefono+fecha+"</H1>");
+	}
+	
+	
+	
+	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method stub

@@ -55,7 +55,7 @@
     	<h3>Crear usuario</h3>
     <%}%>
 
-	<form name="formulario1" action="UserDataServlet" onsubmit="return validarForm()" method="post">
+	<form name="formulario1" action="LoginServlet?accion=nuevo" onsubmit="return validarForm()" method="post">
 	<table align="center" cellpadding = "10">
 	
 		

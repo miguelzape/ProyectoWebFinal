@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" import="java.util.List, proyectoFinal.utils.*"%>
+
 <!DOCTYPE html>
 <html lang="es-ES">
 <head>
@@ -13,9 +16,10 @@
 
 </head>
 <body>
+
 	<div class="bg-naranja">
 	<div class="title-wrapper">
-		<h2>Â¡Bienvenido!</h2>
+		<h2>¡Bienvenido!</h2>
 		<h4>Inicie sesion</h4>
 	</div>
     <!--h3>Introduzca sus credenciales</h3-->
@@ -39,8 +43,7 @@
 		
 	</form>
 </table>
-    <a href="userdata.jsp" >Crear un usuario nuevo</a>
-    <!--a href="prueba_alta.html">Alta alumno</a-->
+    
     </div>
 </body>
 </html>
