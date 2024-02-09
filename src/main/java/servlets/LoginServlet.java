@@ -3,12 +3,14 @@ package servlets;
 import java.io.IOException;
 
 import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import proyectoFinal.Daos.UserDao;
+import proyectoFinal.utils.Propiedades;
 
 /**
  * Servlet implementation class LoginServlet
@@ -37,7 +39,6 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		HttpSession sesion = request.getSession();
-		//System.out.println(sesion.getId());
 		String accion=request.getParameter("accion");
 		if (accion == null) {
 			response.getWriter().append("<H1>Llamada a LoginServlet incompleta</H1>");
@@ -63,7 +64,6 @@ public class LoginServlet extends HttpServlet {
 			
 			if (idEncontrado > 0) {
 				//response.getWriter().append("<H1>Logeado correctamente</H1>");
-	
 				request.setAttribute("listaUsuarios", udao.getUsers());
 				RequestDispatcher rd = request.getRequestDispatcher("tablaUsers.jsp");
 				rd.forward(request, response);
@@ -81,7 +81,15 @@ public class LoginServlet extends HttpServlet {
 		}
 		
 	}
-	
-	
+
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		// TODO Auto-generated method stub
+		super.init(config);
+		//System.out.println(getServletContext().getRealPath("/"));
+		Propiedades pro = new Propiedades();
+		pro.cargarProperties();
+	}
+		
 
 }

@@ -19,10 +19,6 @@ public class Utils {
 	    return (y+"-"+m+"-"+d);
 	}
 	
-	
-	
-	
-	
 	public static Date stringToDate (String fecha) {
 		
 		Calendar calendario = Calendar.getInstance();
@@ -37,5 +33,5 @@ public class Utils {
         return calendario.getTime();
 	}
 	
-
+	
 }

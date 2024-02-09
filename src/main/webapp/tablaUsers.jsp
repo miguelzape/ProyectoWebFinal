@@ -2,7 +2,7 @@
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="java.util.List, java.text.SimpleDateFormat" 
-    import="proyectoFinal.entities.User, proyectoFinal.entities.Rol ,proyectoFinal.utils.Utils"%>
+    import="proyectoFinal.entities.User, proyectoFinal.entities.Rol ,proyectoFinal.utils.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,8 +29,10 @@
 </head>
 <body>
 
+<%Propiedades pro=new Propiedades();%>
+
 <table align="center" cellpadding = "10">
-		<caption>Tabla de usuarios</caption>
+		<caption><%=pro.leerProper("titulo1")%></caption>
 		<tr>
 			<th></th>
 			<th><a href="#">Usuario</a></th>
