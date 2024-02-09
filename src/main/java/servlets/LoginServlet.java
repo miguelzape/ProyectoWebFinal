@@ -35,9 +35,22 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	
 		HttpSession sesion = request.getSession();
 		//System.out.println(sesion.getId());
+		String accion=request.getParameter("accion");
+		if (accion == null) {
+			response.getWriter().append("<H1>Llamada a LoginServlet incompleta</H1>");
+		} 
+		else if (accion.equalsIgnoreCase("login")) {
+			login (request, response);
+		}
+			
+		
+	}
+	
+	private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		
 		if (request.getParameter("userCaja")!=null && request.getParameter("passwordCaja")!=null) {
 			String userCaja=request.getParameter("userCaja");
 			String passWordCaja=request.getParameter("passwordCaja");
@@ -66,6 +79,9 @@ public class LoginServlet extends HttpServlet {
 		}else {
 			response.getWriter().append("<H1>Se necesita usuario y clave</H1>");
 		}
+		
 	}
+	
+	
 
 }
