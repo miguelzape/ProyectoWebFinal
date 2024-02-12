@@ -25,6 +25,13 @@
         }
 </style>
 
+<script type="text/javascript">
+	function borrar () {
+		var x = document.forms.myForm;
+		alert("se ha pulsado borrar");
+	}
+</script>
+
 
 </head>
 <body>
@@ -34,6 +41,7 @@
 <table align="center" cellpadding = "10">
 		<caption><%=pro.leerProper("titulo1")%></caption>
 		<tr>
+			<th></th>
 			<th></th>
 			<th><a href="#">Usuario</a></th>
 			<th><a href="#">Nombre</a></th>
@@ -68,7 +76,13 @@ for (User u: usuarios) {
 				&rol=<%=u.getRol()%>
 				<%String claveString = new String(u.getClave());%>
 				&clave=<%=claveString%>
-				&id=<%=u.getIdUsuario()%>">Editar</a></td>  
+				&id=<%=u.getIdUsuario()%>">
+				<img border="0" alt="modificar" src="modify.png" width="16" height="16">
+				</a></td>  
+				
+				<td>
+				<img border="0" alt="borrar" src="delete.png" width="16" height="16" onclick="borrar()">
+				</td>  
 
 			<td><%=u.getUsuario()%></td>
 			<td><%=u.getNombre()%></td>

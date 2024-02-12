@@ -8,15 +8,21 @@
 	<script type="text/javascript">
 		
 		function validarForm() {
- 		 
  		 let p1 = document.forms["formulario1"]["password"].value
  		 let p2 = document.forms["formulario1"]["password2"].value
- 		 
-	     if (p1 == p2){
+ 		 let r = document.forms["formulario1"]["tipo"].value
+ 		
+	     if ((p1 == p2) && (r != "0")){
 			  return true
 		  }
 		  else{
-			  alert("La constraseña no coincide con su verificacion")
+			  if (r!="0"){
+				  alert("La constraseña no coincide con su verificacion")
+			  }
+			  else
+			  {
+				  alert("Debe seleccionar un rol")
+			  }
 	    	  return false
 		  }
 		} 
@@ -121,8 +127,27 @@
 			tabindex="10" value="<%=p_naci2%>"></td>
 		</tr>
 		<tr>
+			<td>Rol</td> 
+			<td><select name="tipo" id="tipo" tabindex="11">
+				<option value="0">Elija una opcion</option>
+  				<option value="user" <% 
+  					if (p_rol.equalsIgnoreCase("user")){
+  						%> selected="selected" <%
+  					}
+  				%>>Usuario</option>
+  				<option value="admin" <% 
+  					if (p_rol.equalsIgnoreCase("admin")){
+  						%> selected="selected" <%
+  					}
+  				%>>Administrador</option>
+ 		</select></td>
+		</tr>
+		
+		
+		
+		<tr>
 			<td></td>
-			<td><input type="submit" value="Aceptar" tabindex="11"></td>
+			<td><input type="submit" value="Aceptar" tabindex="12"></td>
 		</tr>	
 	
 </table>
