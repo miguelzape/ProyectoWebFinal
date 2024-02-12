@@ -81,7 +81,9 @@ for (User u: usuarios) {
 				</a></td>  
 				
 				<td>
-				<img border="0" alt="borrar" src="delete.png" width="16" height="16" onclick="borrar()">
+				<a href="LoginServlet?accion=borrar&id=<%=u.getIdUsuario()%>">
+				<img border="0" alt="borrar" src="delete.png" width="16" height="16">
+				</a>
 				</td>  
 
 			<td><%=u.getUsuario()%></td>

@@ -55,6 +55,9 @@ public class LoginServlet extends HttpServlet {
 		else if (accion.equalsIgnoreCase("modificar")) {
 			modificar (request, response);
 		}
+		else if (accion.equalsIgnoreCase("borrar")) {
+			borrar (request, response);
+		}
 			
 		
 	}
@@ -141,8 +144,13 @@ public class LoginServlet extends HttpServlet {
 	
 	private void modificar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		
-
-		}
+	}
+	
+	private void borrar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	String id=request.getParameter("id");
+	System.out.println("El id que se quiere borrar es "+id);
+		
+	}
 	
 	
 	
