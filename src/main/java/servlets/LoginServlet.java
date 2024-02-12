@@ -52,6 +52,9 @@ public class LoginServlet extends HttpServlet {
 		else if (accion.equalsIgnoreCase("nuevo")) {
 			nuevo (request, response);
 		}
+		else if (accion.equalsIgnoreCase("modificar")) {
+			modificar (request, response);
+		}
 			
 		
 	}
@@ -103,25 +106,43 @@ public class LoginServlet extends HttpServlet {
 	String telefono=request.getParameter("telefono");
 	long tele = Long.parseLong(telefono);
 	String fecha=request.getParameter("fecha");
+	String rol=request.getParameter("rol");
 	// 1985-01-03 año-mes-dia. asi se recibe
 	System.out.println("la fecha recibida es= "+fecha);
 	Date f=Utils.string2ToDate(fecha);
+	fecha = Utils.dateToString(f);
 	
 	response.getWriter().append("<H1>"+nombre+apellidos+dni+genero+idusuario+clave+mail+telefono+fecha+"</H1>");
 	
-	User usuario = new User(idusuario,clave,nombre,apellidos,dni,genero,mail,tele,f,"rol");
 	
 	UserDao udao= new UserDao();
-	udao.putUser(usuario);
 	
-	request.setAttribute("listaUsuarios", udao.getUsers());
-	RequestDispatcher rd = request.getRequestDispatcher("tablaUsers.jsp");
+	String enlace;
+	if (udao.existUsuario(idusuario)) {
+		enlace ="userdata.jsp?usuario=\"\"&nombre="+nombre+"&apellidos="+apellidos+"&dni="+dni+"&genero="+genero+"&mail="+mail+"&telefono=0&nacimiento="+fecha+"&rol="+rol+"&clave="+clave+"&msg=Ya existe el usuario " + idusuario;
+		System.out.println(enlace);
+	}
+	
+	else {
+		User usuario = new User(idusuario,clave,nombre,apellidos,dni,genero,mail,tele,f,rol);
+		udao.putUser(usuario);	
+		request.setAttribute("listaUsuarios", udao.getUsers());
+		enlace="tablaUsers.jsp"; 
+	}
+	
+	RequestDispatcher rd = request.getRequestDispatcher(enlace);
 	rd.forward(request, response);
 	
 	udao.close();
 	
 
 	}
+	
+	
+	private void modificar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		
+
+		}
 	
 	
 	

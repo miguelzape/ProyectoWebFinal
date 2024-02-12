@@ -41,6 +41,7 @@
 	   String p_dni = request.getParameter("dni") != null ? request.getParameter("dni"):"";
 	   String p_gene = request.getParameter("genero")!= null ? request.getParameter("genero"):"";
 	   String p_mail = request.getParameter("mail") != null ? request.getParameter("mail"):"";
+	   String msg = request.getParameter("msg") != null ? request.getParameter("msg"):"";
 	   String s_tele = request.getParameter("telefono");
 	   long p_tele = (s_tele != null) ? Long.parseLong(s_tele.trim()) : 0;
 	   String p_naci = request.getParameter("nacimiento");
@@ -61,7 +62,10 @@
     	<h3>Crear usuario</h3>
     <%}%>
 
-	<form name="formulario1" action="LoginServlet?accion=nuevo" onsubmit="return validarForm()" method="post">
+
+	<form name="formulario1" action="LoginServlet?accion=
+	<% if (tipo){%>modificar<%}else{%>nuevo<%}%>" 
+	onsubmit="return validarForm()" method="post">
 	<table align="center" cellpadding = "10">
 	
 		
@@ -141,6 +145,12 @@
   					}
   				%>>Administrador</option>
  		</select></td>
+		</tr>
+		
+		<tr>
+			<td></td>
+			<td><p><%=msg%></p></td>
+		
 		</tr>
 		
 		
