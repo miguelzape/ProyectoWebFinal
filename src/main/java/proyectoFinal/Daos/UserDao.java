@@ -2,7 +2,6 @@ package proyectoFinal.Daos;
 
 import java.util.Arrays;
 import java.util.List;
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import proyectoFinal.entities.User;
@@ -52,10 +51,13 @@ public class UserDao {
 	}
 
 	public List<User> getUserByUsuario(String usuario) {
-
 		TypedQuery<User> query = em.createQuery("from User c where c.usuario=?1", User.class);
 		query.setParameter(1, usuario);
 		return query.getResultList();
+	}
+	
+	public User getUser(long id) {
+	   return em.find(User.class, id);
 	}
 
 	public boolean existUsuario(String usuario) {

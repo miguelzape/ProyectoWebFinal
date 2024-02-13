@@ -156,12 +156,19 @@ public class LoginServlet extends HttpServlet {
 	
 	private void modificar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		//response.getWriter().append("<H1>No existe aun el metodo modificar de doPost</H1>");
+		User nuevo = rellenaDatosUser(request);
 		String idString=request.getParameter("id");
 		long id=Long.parseLong(idString);
-		User u = rellenaDatosUser(request);
-		u.setIdUsuario(id);
 		UserDao udao= new UserDao();
-		udao.editUser(u);
+		User viejo = udao.getUser(id);
+		
+		viejo.setApellidos(nuevo.getApellidos());
+		viejo.setClave(nuevo.getClave());
+		viejo.setDni(nuevo.getDni());
+		viejo.setEmail(nuevo.getApellidos());
+		
+		
+		
 //		request.setAttribute("listaUsuarios", udao.getUsers());
 //		RequestDispatcher rd = request.getRequestDispatcher("tablaUsers.jsp");
 //		rd.forward(request, response);
