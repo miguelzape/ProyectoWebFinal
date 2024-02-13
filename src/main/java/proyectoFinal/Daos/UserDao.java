@@ -75,6 +75,7 @@ public class UserDao {
 			em.getTransaction().commit();
 		} catch (Exception e) {
 			em.getTransaction().rollback();
+			e.printStackTrace();
 		}
 	}
 

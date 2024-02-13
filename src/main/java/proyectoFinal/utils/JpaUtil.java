@@ -4,7 +4,13 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
+
+
 public class JpaUtil { 
+	
+	private static EntityManager em;
+	
+	
 //    private static final EntityManagerFactory entityManagerFactory = buildEntityManagerFactory();
 //
 //    private static EntityManagerFactory buildEntityManagerFactory(){
@@ -16,16 +22,26 @@ public class JpaUtil {
 //    }
 	
 	public static EntityManager getEM (String persistenceUnit) {
-    	EntityManagerFactory emf = Persistence.createEntityManagerFactory(persistenceUnit);
-    	EntityManager em = emf.createEntityManager(); 
-    	
+		
+		if (em == null) {
+			EntityManagerFactory emf = Persistence.createEntityManagerFactory(persistenceUnit);
+	    	em = emf.createEntityManager(); 
+		}	
     	return em;
     }
 	
-	
-	public static EntityManager getEM () {
-		
+	public static EntityManager getEM () {	
     	return getEM("HibernateMySql");
     }
+	
+	public static void closeEM () {	
+    	if (em != null) {
+    		em.close();
+    		em = null;
+    	}
+    }
+	
+	
+	
 }
  

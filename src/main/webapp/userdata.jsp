@@ -150,10 +150,7 @@
 		<tr>
 			<td></td>
 			<td><p><%=msg%></p></td>
-		
 		</tr>
-		
-		
 		
 		<tr>
 			<td></td>

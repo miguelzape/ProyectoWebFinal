@@ -95,7 +95,6 @@ public class LoginServlet extends HttpServlet {
 				rd.forward(request, response);
 			}
 			
-			udao.close();
 		}else {
 			response.getWriter().append("<H1>Se necesita usuario y clave</H1>");
 		}
@@ -107,24 +106,23 @@ public class LoginServlet extends HttpServlet {
 	private void nuevo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 				
 				
-	String nombre=request.getParameter("nombre");
-	String apellidos=request.getParameter("apellidos");
-	String dni=request.getParameter("dni");
-	String genero=request.getParameter("genero");
-	String idusuario=request.getParameter("idusuario");
-	String clave=request.getParameter("password");
-	String mail=request.getParameter("mail");
-	String telefono=request.getParameter("telefono");
+	String nombre=request.getParameter("nombre")!=null?request.getParameter("nombre"):"";
+	String apellidos=request.getParameter("apellidos")!=null?request.getParameter("apellidos"):"";
+	String dni=request.getParameter("dni")!=null?request.getParameter("dni"):"";
+	String genero=request.getParameter("genero")!=null?request.getParameter("genero"):"";
+	String idusuario=request.getParameter("idusuario")!=null?request.getParameter("idusuario"):"";
+	String clave=request.getParameter("password")!=null?request.getParameter("password"):"";
+	String mail=request.getParameter("mail")!=null?request.getParameter("mail"):"";
+	String telefono=request.getParameter("telefono")!=null?request.getParameter("telefono"):"";
 	long tele = Long.parseLong(telefono);
-	String fecha=request.getParameter("fecha");
-	String rol=request.getParameter("rol");
+	String fecha=request.getParameter("fecha")!=null?request.getParameter("fecha"):"";
+	String rol=request.getParameter("rol")!=null?request.getParameter("rol"):"";
 	// 1985-01-03 año-mes-dia. asi se recibe
-	System.out.println("la fecha recibida es= "+fecha);
+	// System.out.println("la fecha recibida es= "+fecha); 
 	Date f=Utils.string2ToDate(fecha);
 	fecha = Utils.dateToString(f);
 	
-	response.getWriter().append("<H1>"+nombre+apellidos+dni+genero+idusuario+clave+mail+telefono+fecha+"</H1>");
-	
+	//response.getWriter().append("<H1>"+nombre+apellidos+dni+genero+idusuario+clave+mail+telefono+fecha+"</H1>");
 	
 	UserDao udao= new UserDao();
 	
@@ -144,14 +142,12 @@ public class LoginServlet extends HttpServlet {
 	RequestDispatcher rd = request.getRequestDispatcher(enlace);
 	rd.forward(request, response);
 	
-	udao.close();
 	
-
 	}
 	
 	
 	private void modificar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		
+		response.getWriter().append("<H1>No existe aun el metodo modificar de doPost</H1>");
 	}
 	
 	private void borrar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -163,8 +159,6 @@ public class LoginServlet extends HttpServlet {
 	request.setAttribute("listaUsuarios", udao.getUsers());
 	RequestDispatcher rd = request.getRequestDispatcher("tablaUsers.jsp");
 	rd.forward(request, response);
-	
-	udao.close();
 
 	}
 	

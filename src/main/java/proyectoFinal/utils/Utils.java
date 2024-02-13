@@ -38,17 +38,27 @@ public static Date string2ToDate (String fecha) {
 	
 	
 	// 1985-01-03 año-mes-dia. asi se recibe
-		
+	
 		Calendar calendario = Calendar.getInstance();
-		int y = Integer.parseInt(fecha.substring(0, 4));
-		int m = Integer.parseInt(fecha.substring(5, 7)) - 1;
-		int d = Integer.parseInt(fecha.substring(8, 10));
-
+		int y,m,d;
+		
+		if (fecha != null & fecha !="") {
+			y = Integer.parseInt(fecha.substring(0, 4));
+			m = Integer.parseInt(fecha.substring(5, 7)) - 1;
+			d = Integer.parseInt(fecha.substring(8, 10));
+		}
+		else {
+			y = 2000;
+			m = 0;
+			d = 1;
+		}
+		
         calendario.set(Calendar.YEAR, y);
         calendario.set(Calendar.MONTH, m);
         calendario.set(Calendar.DAY_OF_MONTH, d);
 
         return calendario.getTime();
+
 	}
 	
 	
