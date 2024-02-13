@@ -17,10 +17,8 @@ public class UserDao {
 	}
 
 	public void close() {
-		if (em != null) {
-			em.close();
-			em = null;
-		}
+		JpaUtil.closeEM();
+		em=null;
 	}
 
 	public List<User> getUsers() {
@@ -80,7 +78,6 @@ public class UserDao {
 	}
 
 	public void deleteUser(long id) {
-
 		try {
 			User user = em.find(User.class, id);
 
@@ -91,7 +88,17 @@ public class UserDao {
 			em.getTransaction().rollback();
 			e.printStackTrace();
 		}
-
+	}
+	
+	public void editUser(User user) {
+		try {
+			em.getTransaction().begin();
+			em.merge(user);
+			em.getTransaction().commit();
+		} catch (Exception e) {
+			em.getTransaction().rollback();
+			e.printStackTrace();
+		}
 	}
 
 }

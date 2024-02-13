@@ -138,6 +138,11 @@ public class User implements Serializable{
 		return idUsuario;
 	}
 	
+	
+	public void setIdUsuario(long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
 	public String getRol() {
 		return rol;
 	}

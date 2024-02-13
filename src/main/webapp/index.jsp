@@ -16,6 +16,7 @@
 
 </head>
 <body>
+<%String msg = request.getParameter("msg") != null ? request.getParameter("msg"):""; %>
 
 	<div class="bg-naranja">
 	<div class="title-wrapper">
@@ -33,6 +34,9 @@
 				<td><input type="password" class="input-box2" name="passwordCaja"
 				required="true" maxlength="15" minlength="4" placeholder="clave" tabindex="2"/></td>	
 			</trclass="input-box">
+			<tr>
+			<td><p style="color: white;"><%=msg%></p></td>
+		</tr>
 		<tr>
 			<td><input type="submit" value="Aceptar" class="button-74" tabindex="3"></td>	
 		</tr>

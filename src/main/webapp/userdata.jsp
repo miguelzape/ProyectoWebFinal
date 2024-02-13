@@ -31,11 +31,9 @@
 	<title>Datos de usuario</title>
 </head>
 <body>
-<%
-	   
-	   String p_user = request.getParameter("usuario");
-	   boolean tipo = (p_user != null && p_user.length() > 3); // true= modificar false=crear
-	   p_user = request.getParameter("usuario") != null ? request.getParameter("usuario"):"";
+<%   
+	   String p_user = request.getParameter("usuario") != null ? request.getParameter("usuario"):"";
+	   boolean modificar = (p_user != null && p_user.length() > 3); // true= modificar false=crear
 	   String p_nomb = request.getParameter("nombre") != null ? request.getParameter("nombre"):"";
 	   String p_apel = request.getParameter("apellidos") != null ? request.getParameter("apellidos"):"";
 	   String p_dni = request.getParameter("dni") != null ? request.getParameter("dni"):"";
@@ -50,13 +48,13 @@
 	
 	   String p_clav = request.getParameter("clave") != null?request.getParameter("clave"):"";
 	   String p_rol = request.getParameter("rol") != null?request.getParameter("rol"):"";
-	   String p_id = request.getParameter("id");
+	   String p_id = request.getParameter("id")!=null?request.getParameter("id"):"ninguno";
 
 %>
 
     <div class="bg-amarillo">
     
-    <%if (tipo){ %>
+    <%if (modificar){ %>
     	<h3>Modificar usuario</h3>
     <%}else{ %>
     	<h3>Crear usuario</h3>
@@ -64,7 +62,7 @@
 
 
 	<form name="formulario1" action="LoginServlet?accion=
-	<% if (tipo){%>modificar<%}else{%>nuevo<%}%>" 
+	<% if (modificar){%>modificar<%}else{%>nuevo<%}%>&id=<%=p_id%>" 
 	onsubmit="return validarForm()" method="post">
 	<table align="center" cellpadding = "10">
 	
@@ -102,8 +100,8 @@
 		</tr>
 		<tr>
 			<td>Usuario</td>
-			<td>*<input type="text" name="idusuario" required="true" 
-			     maxlength="15" minlength="4" tabindex="5" value="<%=p_user%>"></td>
+			<td>*<input type="text" <%if (modificar) {%> disabled="disabled" <%}%>
+			     name="idusuario" required="true" maxlength="15" minlength="4" tabindex="5" value="<%=p_user%>"></td>
 		</tr>
 		<tr>
 			<td>Contraseña</td>
@@ -134,12 +132,12 @@
 			<td>Rol</td> 
 			<td><select name="tipo" id="tipo" tabindex="11">
 				<option value="0">Elija una opcion</option>
-  				<option value="user" <% 
+  				<option value="User" <% 
   					if (p_rol.equalsIgnoreCase("user")){
   						%> selected="selected" <%
   					}
   				%>>Usuario</option>
-  				<option value="admin" <% 
+  				<option value="Admin" <% 
   					if (p_rol.equalsIgnoreCase("admin")){
   						%> selected="selected" <%
   					}
@@ -149,7 +147,7 @@
 		
 		<tr>
 			<td></td>
-			<td><p><%=msg%></p></td>
+			<td><h4 style="color: red; background-color: white "><%=msg%></h4></td>
 		</tr>
 		
 		<tr>
