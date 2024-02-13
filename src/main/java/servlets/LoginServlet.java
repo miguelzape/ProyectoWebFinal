@@ -33,7 +33,15 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String accion=request.getParameter("accion");
+		if (accion.equalsIgnoreCase("borrar")) {
+			System.out.println("recibido mensaje de borrar ");
+			borrar (request, response);
+		}
+		else {
+			response.getWriter().append("<H1>El metodo doGet ha recibido una accion inesperada</H1>");
+		}
+		
 	}
 
 	/**
@@ -55,8 +63,8 @@ public class LoginServlet extends HttpServlet {
 		else if (accion.equalsIgnoreCase("modificar")) {
 			modificar (request, response);
 		}
-		else if (accion.equalsIgnoreCase("borrar")) {
-			borrar (request, response);
+		else {
+			response.getWriter().append("<H1>El metodo doPost ha recibido una accion inesperada</H1>");
 		}
 			
 		
@@ -147,9 +155,17 @@ public class LoginServlet extends HttpServlet {
 	}
 	
 	private void borrar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-	String id=request.getParameter("id");
-	System.out.println("El id que se quiere borrar es "+id);
-		
+	String Cadenaid=request.getParameter("id");
+	Long id=Long.parseLong(Cadenaid);
+	//System.out.println("El id que se quiere borrar es "+id);
+	UserDao udao= new UserDao();
+	udao.deleteUser(id);
+	request.setAttribute("listaUsuarios", udao.getUsers());
+	RequestDispatcher rd = request.getRequestDispatcher("tablaUsers.jsp");
+	rd.forward(request, response);
+	
+	udao.close();
+
 	}
 	
 	
