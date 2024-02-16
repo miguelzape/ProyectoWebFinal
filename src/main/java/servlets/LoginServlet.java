@@ -36,7 +36,7 @@ public class LoginServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String accion=request.getParameter("accion");
 		if (accion.equalsIgnoreCase("borrar")) {
-			System.out.println("recibido mensaje de borrar ");
+			//System.out.println("recibido mensaje de borrar ");
 			borrar (request, response);
 		}
 		else {

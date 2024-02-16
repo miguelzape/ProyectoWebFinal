@@ -29,19 +29,17 @@
 </style>
 
 <script type="text/javascript">
-	function borrarSeguro (User u) {
+
+	function borradoSeguro(number) {
 		//var x = document.forms.myForm;
 		var mensaje = confirm("¿Seguro que quiere borrar este usuario?");
 	
-		if (mensaje) 
-			var enlace="LoginServlet?accion=borrar&id="+u.getIdUsuario();
-			window.open(enlace);
+ 		if (mensaje) {
+ 			var enlace="LoginServlet?accion=borrar&id="+number;
+ 			window.open(enlace);
 		}    
 	}
 	
-	function borrarSeguro2 () {
-		alert ("funciona"); 
-	}
 </script>
 
 
@@ -51,7 +49,8 @@
 	<div class="row">
 		<div class="col">
 
-<%Propiedades pro=new Propiedades();%>
+<%Propiedades pro=new Propiedades();
+  long idd;  %>
 
 <div class="table-responsive mt-4">
 <!-- aparece scroll pero no para la página sino solo para la tabla-->
@@ -96,11 +95,12 @@ for (User u: usuarios) {
 				
 				&clave=<%=u.getClave()%>
 				&id=<%=u.getIdUsuario()%>">
+				<%idd=u.getIdUsuario();%>
 				<img border="0" alt="modificar" src="modify.png" width="16" height="16">
 				</a></td>  
 				
 				<td>
-				<img role="button"  border="0" alt="borrar" src="delete.png" width="16" height="16" onclick="borrarSeguro2()">
+				<img role="button"  alt="borrar" src="delete.png" width="16" height="16" onclick="borradoSeguro(<%=idd%>)">
 				</td>  
 
 			<td><%=u.getUsuario()%></td>
