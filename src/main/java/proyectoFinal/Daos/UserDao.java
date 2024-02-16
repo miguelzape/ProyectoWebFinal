@@ -23,6 +23,11 @@ public class UserDao {
 	public List<User> getUsers() {
 		return em.createQuery("from User", User.class).getResultList();
 	}
+	
+	public List<User> getUsersOrdenados(String campo) {
+		String cadena = "from User c order by c."+campo;
+		return em.createQuery(cadena, User.class).getResultList();
+	}
 
 	/**
 	 * Esta funcion devuelve el userID que concuerde con el usuario y clave

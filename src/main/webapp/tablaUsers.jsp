@@ -11,6 +11,22 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 <title>Listado de usuarios</title>
+
+
+<script type="text/javascript">
+
+	function borradoSeguro(number) {
+		//var x = document.forms.myForm;
+		var mensaje = confirm("¿Seguro que quiere borrar este usuario?");
+	
+ 		if (mensaje) {
+ 			var enlace="LoginServlet?accion=borrar&id="+number;
+ 			window.open(enlace);
+		}    
+	}
+	
+</script>
+
 <style type="text/css">
 	table, td, th { border:1px solid black; }
 	#table { border-spacing:10px; }
@@ -27,20 +43,6 @@
             border-radius: 3%;
         }
 </style>
-
-<script type="text/javascript">
-
-	function borradoSeguro(number) {
-		//var x = document.forms.myForm;
-		var mensaje = confirm("¿Seguro que quiere borrar este usuario?");
-	
- 		if (mensaje) {
- 			var enlace="LoginServlet?accion=borrar&id="+number;
- 			window.open(enlace);
-		}    
-	}
-	
-</script>
 
 
 </head>
@@ -61,15 +63,15 @@
 		<tr>
 			<th></th>
 			<th></th>
-			<th><a href="#">Usuario</a></th>
-			<th><a href="#">Nombre</a></th>
-			<th><a href="#">Apellidos</a></th>
-			<th><a href="#">DNI</a></th>
-			<th><a href="#">Genero</a></th>
-			<th><a href="#">E-mail</a></th>
-			<th><a href="#">Telefono</a></th>
-			<th><a href="#">Nacimiento</a></th>
-			<th><a href="#">Tipo</a></th>
+			<th><a href="LoginServlet?accion=ordenar&orden=usuario">Usuario</a></th>
+			<th><a href="LoginServlet?accion=ordenar&orden=nombre">Nombre</a></th>
+			<th><a href="LoginServlet?accion=ordenar&orden=apellidos">Apellidos</a></th>
+			<th><a href="LoginServlet?accion=ordenar&orden=dni">DNI</a></th>
+			<th><a href="LoginServlet?accion=ordenar&orden=sexo">Genero</a></th>
+			<th><a href="LoginServlet?accion=ordenar&orden=email">E-mail</a></th>
+			<th><a href="LoginServlet?accion=ordenar&orden=telefono">Telefono</a></th>
+			<th><a href="LoginServlet?accion=ordenar&orden=nacimiento">Nacimiento</a></th>
+			<th><a href="LoginServlet?accion=ordenar&orden=rol">Tipo</a></th>
 		</tr>
 		
 <% 

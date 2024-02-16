@@ -39,6 +39,9 @@ public class LoginServlet extends HttpServlet {
 			//System.out.println("recibido mensaje de borrar ");
 			borrar (request, response);
 		}
+		else if (accion.equalsIgnoreCase("ordenar")) {
+			ordenar (request, response);
+		}
 		else {
 			response.getWriter().append("<H1>El metodo doGet ha recibido una accion inesperada</H1>");
 		}
@@ -64,12 +67,28 @@ public class LoginServlet extends HttpServlet {
 		else if (accion.equalsIgnoreCase("modificar")) {
 			modificar (request, response);
 		}
+		
 		else {
 			response.getWriter().append("<H1>El metodo doPost ha recibido una accion inesperada</H1>");
 		}
 			
 		
 	}
+	
+	private void ordenar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		String orden=request.getParameter("orden")!=null?request.getParameter("orden"):"";
+		
+		UserDao udao= new UserDao();
+		request.setAttribute("listaUsuarios", udao.getUsersOrdenados(orden));
+		RequestDispatcher rd = request.getRequestDispatcher("tablaUsers.jsp");
+		rd.forward(request, response);
+		
+		
+	}
+	
+	
+	
+	
 	
 	private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		
