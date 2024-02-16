@@ -12,21 +12,6 @@
 
 <title>Listado de usuarios</title>
 
-
-<script type="text/javascript">
-
-	function borradoSeguro(number) {
-		//var x = document.forms.myForm;
-		var mensaje = confirm("¿Seguro que quiere borrar este usuario?");
-	
- 		if (mensaje) {
- 			var enlace="LoginServlet?accion=borrar&id="+number;
- 			window.open(enlace);
-		}    
-	}
-	
-</script>
-
 <style type="text/css">
 	table, td, th { border:1px solid black; }
 	#table { border-spacing:10px; }
@@ -44,22 +29,38 @@
         }
 </style>
 
+<script type="text/javascript">
+
+	function borradoSeguro(number) {
+		//var x = document.forms.myForm;
+		var mensaje = confirm("¿Seguro que quiere borrar este usuario?");
+	
+ 		if (mensaje) {
+ 			var enlace="LoginServlet?accion=borrar&id="+number;
+ 			window.open(enlace);
+		}    
+	}
+	
+</script>
+
+
+
 
 </head>
 <body>
-<div class="container">
-	<div class="row">
-		<div class="col">
-
 <%Propiedades pro=new Propiedades();
   long idd;  %>
+<div class="container">
+	<div class="row">
+		<div class="col-12 text-center">
+			<h3><%=pro.leerProper("titulo1")%></h3>
+		</div>
+	</div>
 
-<div class="table-responsive mt-4">
-<!-- aparece scroll pero no para la página sino solo para la tabla-->
-					
-
-<table class="table table-striped" align="center" cellpadding = "10">
-		<caption><%=pro.leerProper("titulo1")%></caption>
+<div class="row">				
+	<div class="col">
+<table class="table table-striped table-primary" align="center" cellpadding = "10">
+		
 		<tr>
 			<th></th>
 			<th></th>

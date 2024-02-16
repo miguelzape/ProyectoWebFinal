@@ -1,7 +1,9 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletConfig;
@@ -21,6 +23,7 @@ import proyectoFinal.utils.Utils;
  */
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private List<String> sesiones=new ArrayList<String>();
 
     /**
      * Default constructor. 
@@ -47,6 +50,41 @@ public class LoginServlet extends HttpServlet {
 		}
 		
 	}
+	
+private void borrar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		
+		String usuarioSesion = request.getSession().getId();
+		if (!sesiones.contains(usuarioSesion)) {
+			response.getWriter().append("<H1>La accion borrar solo es accesible con sesion valida</H1>");
+		}
+		else {
+			String Cadenaid=request.getParameter("id");
+			Long id=Long.parseLong(Cadenaid);
+			//System.out.println("El id que se quiere borrar es "+id);
+			UserDao udao= new UserDao();
+			udao.deleteUser(id);
+			request.setAttribute("listaUsuarios", udao.getUsers());
+			RequestDispatcher rd = request.getRequestDispatcher("tablaUsers.jsp");
+			rd.forward(request, response);
+		}
+	}
+	
+	private void ordenar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		String orden=request.getParameter("orden")!=null?request.getParameter("orden"):"";
+		
+		String usuarioSesion = request.getSession().getId();
+		if (!sesiones.contains(usuarioSesion)) {
+			response.getWriter().append("<H1>La accion ordenar solo es accesible con sesion valida</H1>");
+		}
+		else {
+		
+		UserDao udao= new UserDao();
+		request.setAttribute("listaUsuarios", udao.getUsersOrdenados(orden));
+		RequestDispatcher rd = request.getRequestDispatcher("tablaUsers.jsp");
+		rd.forward(request, response);
+		}
+	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -75,19 +113,6 @@ public class LoginServlet extends HttpServlet {
 		
 	}
 	
-	private void ordenar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		String orden=request.getParameter("orden")!=null?request.getParameter("orden"):"";
-		
-		UserDao udao= new UserDao();
-		request.setAttribute("listaUsuarios", udao.getUsersOrdenados(orden));
-		RequestDispatcher rd = request.getRequestDispatcher("tablaUsers.jsp");
-		rd.forward(request, response);
-		
-		
-	}
-	
-	
-	
 	
 	
 	private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -104,6 +129,13 @@ public class LoginServlet extends HttpServlet {
 			
 			if (idEncontrado > 0) {
 				//response.getWriter().append("<H1>Logeado correctamente</H1>");
+				
+				//guardar la id de sesion para verificar accesos a los metodos
+				String usuarioSesion = request.getSession().getId();
+				if (!sesiones.contains(usuarioSesion)) {
+					sesiones.add(usuarioSesion);
+				}
+				
 				request.setAttribute("listaUsuarios", udao.getUsers());
 				RequestDispatcher rd = request.getRequestDispatcher("tablaUsers.jsp");
 				rd.forward(request, response);
@@ -202,18 +234,7 @@ public class LoginServlet extends HttpServlet {
 		rd.forward(request, response);
 	}
 	
-	private void borrar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		String Cadenaid=request.getParameter("id");
-		Long id=Long.parseLong(Cadenaid);
-		//System.out.println("El id que se quiere borrar es "+id);
-		UserDao udao= new UserDao();
-		udao.deleteUser(id);
-		request.setAttribute("listaUsuarios", udao.getUsers());
-		RequestDispatcher rd = request.getRequestDispatcher("tablaUsers.jsp");
-		rd.forward(request, response);
-	}
-	
-	
+
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		
