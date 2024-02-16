@@ -101,7 +101,7 @@ for (User u: usuarios) {
 	</table>
 	
 	<p><a href='userdata.jsp?usuario=""&nombre=""&apellidos=""&dni=""&genero=""
-				&mail=""&telefono=0&nacimiento="01-01-2000"&rol=""&clave=""&id=""'>
+				&mail=""&nacimiento=01-01-2000&rol=""&clave=""&id=""'>
 				Crear nuevo usuario</a></p>
 </body>
 </html>
