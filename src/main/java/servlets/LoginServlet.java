@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import proyectoFinal.Daos.UserDao;
 import proyectoFinal.entities.User;
+import proyectoFinal.enums.EnumUsuarios;
 import proyectoFinal.utils.Propiedades;
 import proyectoFinal.utils.Utils;
 
@@ -155,23 +156,31 @@ public class LoginServlet extends HttpServlet {
 	
 	
 	private void modificar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		//response.getWriter().append("<H1>No existe aun el metodo modificar de doPost</H1>");
+	
+		// creo un usuario con los valores de los parametros recibidos
 		User nuevo = rellenaDatosUser(request);
+		// leo de la base de datos el usuario con el id recibido
 		String idString=request.getParameter("id");
 		long id=Long.parseLong(idString);
 		UserDao udao= new UserDao();
 		User viejo = udao.getUser(id);
 		
+		//sustituyo los datos del usuario leido de la base de datos, por los recibidos en parametros
 		viejo.setApellidos(nuevo.getApellidos());
 		viejo.setClave(nuevo.getClave());
 		viejo.setDni(nuevo.getDni());
-		viejo.setEmail(nuevo.getApellidos());
+		viejo.setEmail(nuevo.getEmail());
+		viejo.setNacimiento(nuevo.getNacimiento());
+		viejo.setNombre(nuevo.getNombre());
+		viejo.setRol(nuevo.getRol());
+		viejo.setSexo(nuevo.getSexo());
+		viejo.setTelefono(nuevo.getTelefono());
 		
-		
-		
-//		request.setAttribute("listaUsuarios", udao.getUsers());
-//		RequestDispatcher rd = request.getRequestDispatcher("tablaUsers.jsp");
-//		rd.forward(request, response);
+		// actualizo la base de datos con el usuario modificado
+		udao.editUser(viejo);
+		request.setAttribute("listaUsuarios", udao.getUsers());
+		RequestDispatcher rd = request.getRequestDispatcher("tablaUsers.jsp");
+		rd.forward(request, response);
 	}
 	
 	private void borrar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -188,11 +197,28 @@ public class LoginServlet extends HttpServlet {
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
-		// TODO Auto-generated method stub
+		
 		super.init(config);
-		//System.out.println(getServletContext().getRealPath("/"));
+		//Cargar las propiedades y pasarlo a memoria para leerlo mas rapido desde cualquier parte
 		Propiedades pro = new Propiedades();
 		pro.cargarProperties();
+		
+		//Crer la conexion con la base de datos
+		UserDao udao = new UserDao();
+	
+		//comprobar si los usuarios del EnumUsarios estan en la base de datos
+		//y si no estan se añaden aqui.
+	   for (EnumUsuarios e: EnumUsuarios.values()) {
+		   
+		   boolean existeUsuario = udao.existUsuario(e.getUsuario());
+		   if (!existeUsuario) {
+			   // solo si no existe ya, se añade usuario a la base de datos
+			   Date f =Utils.stringToDate(e.getFecha());
+			   User usuario = new User(e.getUsuario(),e.getClave(),e.getNombre(),e.getApellidos(),
+					   e.getDni(),e.getGenero(),e.getEmail(),e.getTelefono(),f,e.getRol());
+			   udao.putUser(usuario);
+		   }     
+	   }
 	}
 		
 

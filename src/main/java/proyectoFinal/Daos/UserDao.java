@@ -38,12 +38,14 @@ public class UserDao {
 		TypedQuery<User> query = em.createQuery("from User c where c.usuario=?1", User.class);
 		query.setParameter(1, usuario);
 
+		// no debe existir mas de un usuario con el mismo nombre, pero leo una lista
+		// por si ocurre que si existe
 		users = query.getResultList();
 		if (users.size() < 1) {
-			return -1;
+			return -1L;
 		}
-		for (User u : users) {
-			if (Arrays.equals(u.getClave(), clave.getBytes())) {
+		for (User u : users) {		
+			if (u.getClave().equals(clave)) {
 				return u.getIdUsuario();
 			}
 		}

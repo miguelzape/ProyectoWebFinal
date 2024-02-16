@@ -1,12 +1,15 @@
 <%@page import="org.hibernate.internal.build.AllowSysOut"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="java.util.List, java.text.SimpleDateFormat" 
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8" import="java.util.List, java.text.SimpleDateFormat" 
     import="proyectoFinal.entities.User, proyectoFinal.entities.Rol ,proyectoFinal.utils.*"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 <title>Listado de usuarios</title>
 <style type="text/css">
 	table, td, th { border:1px solid black; }
@@ -26,19 +29,35 @@
 </style>
 
 <script type="text/javascript">
-	function borrar () {
-		var x = document.forms.myForm;
-		alert("se ha pulsado borrar");
+	function borrarSeguro (User u) {
+		//var x = document.forms.myForm;
+		var mensaje = confirm("¿Seguro que quiere borrar este usuario?");
+	
+		if (mensaje) 
+			var enlace="LoginServlet?accion=borrar&id="+u.getIdUsuario();
+			window.open(enlace);
+		}    
+	}
+	
+	function borrarSeguro2 () {
+		alert ("funciona"); 
 	}
 </script>
 
 
 </head>
 <body>
+<div class="container">
+	<div class="row">
+		<div class="col">
 
 <%Propiedades pro=new Propiedades();%>
 
-<table align="center" cellpadding = "10">
+<div class="table-responsive mt-4">
+<!-- aparece scroll pero no para la página sino solo para la tabla-->
+					
+
+<table class="table table-striped" align="center" cellpadding = "10">
 		<caption><%=pro.leerProper("titulo1")%></caption>
 		<tr>
 			<th></th>
@@ -74,16 +93,14 @@ for (User u: usuarios) {
 				&telefono=<%=u.getTelefono()%>
 	    		&nacimiento=<%=Utils.dateToString(u.getNacimiento())%>   
 				&rol=<%=u.getRol()%>
-				<%String claveString = new String(u.getClave());%>
-				&clave=<%=claveString%>
+				
+				&clave=<%=u.getClave()%>
 				&id=<%=u.getIdUsuario()%>">
 				<img border="0" alt="modificar" src="modify.png" width="16" height="16">
 				</a></td>  
 				
 				<td>
-				<a href="LoginServlet?accion=borrar&id=<%=u.getIdUsuario()%>">
-				<img border="0" alt="borrar" src="delete.png" width="16" height="16">
-				</a>
+				<img role="button"  border="0" alt="borrar" src="delete.png" width="16" height="16" onclick="borrarSeguro2()">
 				</td>  
 
 			<td><%=u.getUsuario()%></td>
@@ -99,9 +116,13 @@ for (User u: usuarios) {
 			<%indice++;}%>
 		
 	</table>
+	</div>
 	
 	<p><a href='userdata.jsp?usuario=""&nombre=""&apellidos=""&dni=""&genero=""
 				&mail=""&nacimiento=01-01-2000&rol=""&clave=""&id=""'>
 				Crear nuevo usuario</a></p>
+		</div>		
+	</div>			
+</div>
 </body>
 </html>

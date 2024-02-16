@@ -43,8 +43,7 @@ public class Principal {
 			   User usuario = new User(e.getUsuario(),e.getClave(),e.getNombre(),e.getApellidos(),
 					   e.getDni(),e.getGenero(),e.getEmail(),e.getTelefono(),f,e.getRol());
 			   udao.putUser(usuario);
-		   }
-			      
+		   }     
 	   }
 			
 //		rdao.putRol(admin);

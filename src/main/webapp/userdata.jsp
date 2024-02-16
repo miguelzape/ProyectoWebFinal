@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="java.util.List, proyectoFinal.utils.Utils, java.util.Date"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8" import="java.util.List, proyectoFinal.utils.Utils, java.util.Date"%>
 <!DOCTYPE html>
 <html lang="es-ES">
 <head>
@@ -8,6 +8,7 @@
 	<script type="text/javascript">
 		
 		function validarForm() {
+			
  		 let p1 = document.forms["formulario1"]["password"].value
  		 let p2 = document.forms["formulario1"]["password2"].value
  		 let r = document.forms["formulario1"]["tipo"].value
@@ -17,7 +18,7 @@
 		  }
 		  else{
 			  if (r!="0"){
-				  alert("La constraseña no coincide con su verificacion")
+				  alert("La constraseÃ±a no coincide con su verificacion")
 			  }
 			  else
 			  {
@@ -33,7 +34,7 @@
 <body>
 <%   
 	   String p_user = request.getParameter("usuario") != null ? request.getParameter("usuario"):"";
-	   boolean modificar = (p_user != null && p_user.length() > 3); // true= modificar false=crear
+	   boolean modificar = (p_user.length() > 3); // true= modificar false=crear
 	   String p_nomb = request.getParameter("nombre") != null ? request.getParameter("nombre"):"";
 	   String p_apel = request.getParameter("apellidos") != null ? request.getParameter("apellidos"):"";
 	   String p_dni = request.getParameter("dni") != null ? request.getParameter("dni"):"";
@@ -104,14 +105,14 @@
 			     name="idusuario" required="true" maxlength="15" minlength="4" tabindex="5" value="<%=p_user%>"></td>
 		</tr>
 		<tr>
-			<td>Contraseña</td>
+			<td>ContraseÃ±a</td>
 			<td>*<input type="password" name="password" required="true"
 			     maxlength="15" minlength="4" tabindex="6" value="<%=p_clav%>"></td>
 		</tr>
 		<tr>
-			<td>Contraseña</td> 
+			<td>ContraseÃ±a</td> 
 			<td>*<input type="password" name="password2" required="true"
-			     maxlength="15" minlength="4" tabindex="7" value="<%=p_clav%>"/> verificación </td>
+			     maxlength="15" minlength="4" tabindex="7" value="<%=p_clav%>"/> verificaciÃ³n </td>
 		</tr>
 		<tr>
 			<td>E-mail</td>

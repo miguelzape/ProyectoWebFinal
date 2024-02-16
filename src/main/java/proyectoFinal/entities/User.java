@@ -30,7 +30,7 @@ public class User implements Serializable{
 	@Column(length = 20, nullable=false, unique=true) 
 	private String usuario;
 	@Column(length = 12, nullable=false) 
-	private byte[] clave;
+	private String clave;
 	@Column(length = 20) 
 	private String nombre;
 	@Column(length = 20) 
@@ -61,7 +61,7 @@ public class User implements Serializable{
 			long telefono, Date nacimiento,String rol) {
 		super();
 		this.usuario = usuario;
-		this.clave = clave.getBytes();
+		this.clave = clave;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.dni = dni;
@@ -84,11 +84,11 @@ public class User implements Serializable{
 		this.usuario = usuario;
 	}
 
-	public byte[] getClave() {
+	public String getClave() {
 	    return this.clave;
 	}
 
-	public void setClave(byte[] clave) {
+	public void setClave(String clave) {
 	    this.clave = clave;
 	}
 	
