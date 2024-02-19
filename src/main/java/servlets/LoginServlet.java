@@ -36,53 +36,46 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String accion=request.getParameter("accion");
-		if (accion.equalsIgnoreCase("borrar")) {
-			//System.out.println("recibido mensaje de borrar ");
-			borrar (request, response);
-		}
-		else if (accion.equalsIgnoreCase("ordenar")) {
-			ordenar (request, response);
-		}
-		else {
-			response.getWriter().append("<H1>El metodo doGet ha recibido una accion inesperada</H1>");
-		}
-		
-	}
-	
-private void borrar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		
 		String usuarioSesion = request.getSession().getId();
 		if (!sesiones.contains(usuarioSesion)) {
-			response.getWriter().append("<H1>La accion borrar solo es accesible con sesion valida</H1>");
+			response.getWriter().append("<H1>Accion no permitida para usuarios no logeados</H1>");
 		}
-		else {
-			String Cadenaid=request.getParameter("id");
-			Long id=Long.parseLong(Cadenaid);
-			//System.out.println("El id que se quiere borrar es "+id);
-			UserDao udao= new UserDao();
-			udao.deleteUser(id);
-			request.setAttribute("listaUsuarios", udao.getUsers());
-			RequestDispatcher rd = request.getRequestDispatcher("tablaUsers.jsp");
-			rd.forward(request, response);
+		else {	
+			String accion=request.getParameter("accion");
+			if (accion.equalsIgnoreCase("borrar")) {
+				//System.out.println("recibido mensaje de borrar ");
+				borrar (request, response);
+			}
+			else if (accion.equalsIgnoreCase("ordenar")) {
+				ordenar (request, response);
+			}
+			else {
+				response.getWriter().append("<H1>El metodo doGet ha recibido una accion inesperada</H1>");
+			}
 		}
+		
 	}
 	
+	private void borrar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+			
+		String Cadenaid=request.getParameter("id");
+		Long id=Long.parseLong(Cadenaid);
+		//System.out.println("El id que se quiere borrar es "+id);
+		UserDao udao= new UserDao();
+		udao.deleteUser(id);
+		request.setAttribute("listaUsuarios", udao.getUsers());
+		RequestDispatcher rd = request.getRequestDispatcher("tablaUsers.jsp");
+		rd.forward(request, response);
+			
+	}
+		
 	private void ordenar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		String orden=request.getParameter("orden")!=null?request.getParameter("orden"):"";
-		
-		String usuarioSesion = request.getSession().getId();
-		if (!sesiones.contains(usuarioSesion)) {
-			response.getWriter().append("<H1>La accion ordenar solo es accesible con sesion valida</H1>");
-		}
-		else {
 		
 		UserDao udao= new UserDao();
 		request.setAttribute("listaUsuarios", udao.getUsersOrdenados(orden));
 		RequestDispatcher rd = request.getRequestDispatcher("tablaUsers.jsp");
 		rd.forward(request, response);
-		}
 	}
 	
 
