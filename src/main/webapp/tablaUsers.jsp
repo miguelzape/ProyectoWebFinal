@@ -37,8 +37,15 @@
 	
  		if (mensaje) {
  			var enlace="LoginServlet?accion=borrar&id="+number;
- 			window.open(enlace);
+ 			window.location.href = enlace;
 		}    
+	}
+	
+	function ordenar(campo, sentido) {
+		alert(sentido);
+		
+		var enlace="LoginServlet?accion=ordenar&orden="+campo+sentido;
+		window.location.href = enlace;
 	}
 	
 </script>
@@ -49,7 +56,9 @@
 </head>
 <body>
 <%Propiedades pro=new Propiedades();
-  long idd;  %>
+  long idd;  
+  String sentido=request.getParameter("sentido")!=null?request.getParameter("sentido"):" ASC";
+  %>
 <div class="container">
 	<div class="row">
 		<div class="col-12 text-center">
@@ -64,7 +73,8 @@
 		<tr>
 			<th></th>
 			<th></th>
-			<th><a href="LoginServlet?accion=ordenar&orden=usuario">Usuario</a></th>
+			<!--  th><a href="LoginServlet?accion=ordenar&orden=usuario">Usuario</a></th-->
+			<th><a href="javascript:ordenar('usuario','<%=sentido%>')">Usuario</a></th>
 			<th><a href="LoginServlet?accion=ordenar&orden=nombre">Nombre</a></th>
 			<th><a href="LoginServlet?accion=ordenar&orden=apellidos">Apellidos</a></th>
 			<th><a href="LoginServlet?accion=ordenar&orden=dni">DNI</a></th>

@@ -71,10 +71,11 @@ public class LoginServlet extends HttpServlet {
 		
 	private void ordenar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		String orden=request.getParameter("orden")!=null?request.getParameter("orden"):"";
+		String sentido = orden.contains("ASC")?" DESC":" ASC";
 		
 		UserDao udao= new UserDao();
 		request.setAttribute("listaUsuarios", udao.getUsersOrdenados(orden));
-		RequestDispatcher rd = request.getRequestDispatcher("tablaUsers.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("tablaUsers.jsp?sentido="+sentido);
 		rd.forward(request, response);
 	}
 	
