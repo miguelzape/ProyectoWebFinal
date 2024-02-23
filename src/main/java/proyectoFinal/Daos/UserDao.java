@@ -1,7 +1,7 @@
 package proyectoFinal.Daos;
 
-import java.util.Arrays;
 import java.util.List;
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import proyectoFinal.entities.User;
@@ -30,31 +30,30 @@ public class UserDao {
 	}
 
 	/**
-	 * Esta funcion devuelve el userID que concuerde con el usuario y clave
-	 * facilitados en caso de no exister ese usuario se devuelve un -1
+	 * Esta funcion devuelve el objeto 'User' que concuerde con el usuario y clave
+	 * facilitados en caso de no exister ese usuario se devuelve un nul
 	 * 
 	 * @param usuario
 	 * @param clave
-	 * @return Devuelve un long con el idUsuario. -1 si no existe
+	 * @return Devuelve un objeto de tipo User
 	 */
-	public long validarUser(String usuario, String clave) {
-		List<User> users;
-
+	public User validarUser(String usuario, String clave) {
+		
 		TypedQuery<User> query = em.createQuery("from User c where c.usuario=?1", User.class);
 		query.setParameter(1, usuario);
 
 		// no debe existir mas de un usuario con el mismo nombre, pero leo una lista
 		// por si ocurre que si existe
-		users = query.getResultList();
+		List<User> users = query.getResultList();
 		if (users.size() < 1) {
-			return -1L;
+			return null;
 		}
 		for (User u : users) {		
 			if (u.getClave().equals(clave)) {
-				return u.getIdUsuario();
+				return u;
 			}
 		}
-		return -1L;
+		return null;
 	}
 
 	public List<User> getUserByUsuario(String usuario) {

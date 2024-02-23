@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
@@ -24,6 +27,7 @@ import proyectoFinal.utils.Utils;
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private List<String> sesiones=new ArrayList<String>();
+	private static final Logger logger = LogManager.getLogger(LoginServlet.class);
 
     /**
      * Default constructor. 
@@ -72,10 +76,16 @@ public class LoginServlet extends HttpServlet {
 	private void ordenar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		String orden=request.getParameter("orden")!=null?request.getParameter("orden"):"";
 		String sentido = orden.contains("ASC")?" DESC":" ASC";
+		int pos = orden.indexOf(" ");
 		
+		String anterior=(pos>0)?orden.substring(0, pos):"ninguno";
+		
+		String traza = "Se recibe ordenar por: " + anterior + " en orden contrario a"+sentido;
+		logger.trace(traza);
+
 		UserDao udao= new UserDao();
 		request.setAttribute("listaUsuarios", udao.getUsersOrdenados(orden));
-		RequestDispatcher rd = request.getRequestDispatcher("tablaUsers.jsp?sentido="+sentido);
+		RequestDispatcher rd = request.getRequestDispatcher("tablaUsers.jsp?sentido="+sentido+"&anterior="+anterior);
 		rd.forward(request, response);
 	}
 	
@@ -85,7 +95,7 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		HttpSession sesion = request.getSession();
+		//HttpSession sesion = request.getSession();
 		String accion=request.getParameter("accion");
 		if (accion == null) {
 			response.getWriter().append("<H1>Llamada a LoginServlet incompleta</H1>");
@@ -103,10 +113,8 @@ public class LoginServlet extends HttpServlet {
 		else {
 			response.getWriter().append("<H1>El metodo doPost ha recibido una accion inesperada</H1>");
 		}
-			
-		
+				
 	}
-	
 	
 	
 	private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -115,15 +123,9 @@ public class LoginServlet extends HttpServlet {
 			String userCaja=request.getParameter("userCaja");
 			String passWordCaja=request.getParameter("passwordCaja");
 			UserDao udao= new UserDao();
-			long idEncontrado= udao.validarUser (userCaja, passWordCaja);
+			User usuario = udao.validarUser (userCaja, passWordCaja);
 			
-			//boolean userValido = udao.existUsuario(userCaja);
-			//System.out.println("Usuario= "+userCaja+ " clave= "+passWordCaja+ " existe " + userValido);
-			//System.out.println("el id del usario es= " + idEncontrado);
-			
-			if (idEncontrado > 0) {
-				//response.getWriter().append("<H1>Logeado correctamente</H1>");
-				
+			if (usuario != null) {
 				//guardar la id de sesion para verificar accesos a los metodos
 				String usuarioSesion = request.getSession().getId();
 				if (!sesiones.contains(usuarioSesion)) {
@@ -136,7 +138,7 @@ public class LoginServlet extends HttpServlet {
 			}
 			else
 			{
-				//response.getWriter().append("<H1>Credenciales no validas</H1>");
+				//mostrar la pantalla de inicio con mensaje de error
 				RequestDispatcher rd = request.getRequestDispatcher("index.jsp?msg=Credenciales incorrectas");
 				rd.forward(request, response);
 			}

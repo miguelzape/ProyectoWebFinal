@@ -5,6 +5,8 @@
 <head>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="userdata.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<script src="js/bootstrap.bundle.min.js"></script>
 	<script type="text/javascript">
 		
 		function validarForm() {
@@ -32,6 +34,7 @@
 	<title>Datos de usuario</title>
 </head>
 <body>
+<jsp:include page="cabecera.html"></jsp:include>
 <%   
 	   String p_user = request.getParameter("usuario") != null ? request.getParameter("usuario"):"";
 	   boolean modificar = (p_user.length() > 3); // true= modificar false=crear
@@ -159,6 +162,6 @@
 </table>
 </form>
 </div>
-    
+    <jsp:include page="piepagina.html"></jsp:include>
 </body>
 </html>

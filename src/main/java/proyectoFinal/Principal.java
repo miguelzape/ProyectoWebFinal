@@ -55,7 +55,7 @@ public class Principal {
 		System.out.println(EnumColor.WHITE+ "");
 
 		boolean r1 = udao.existUsuario("paco");
-		long r2 = udao.validarUser("user", "clave");
+		User r2 = udao.validarUser("user", "clave");
 
 		udao.close();
 		

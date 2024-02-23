@@ -41,10 +41,14 @@
 		}    
 	}
 	
-	function ordenar(campo, sentido) {
-		alert(sentido);
-		
-		var enlace="LoginServlet?accion=ordenar&orden="+campo+sentido;
+	function ordenar(campo, sentido, anterior) {
+		if (campo==anterior){
+			var enlace="LoginServlet?accion=ordenar&orden="+campo+sentido;
+	    }
+		else
+			{
+			var enlace="LoginServlet?accion=ordenar&orden="+campo+" ASC";
+			}
 		window.location.href = enlace;
 	}
 	
@@ -55,9 +59,11 @@
 
 </head>
 <body>
+	<jsp:include page="cabecera.html"></jsp:include>
 <%Propiedades pro=new Propiedades();
   long idd;  
   String sentido=request.getParameter("sentido")!=null?request.getParameter("sentido"):" ASC";
+  String anterior=request.getParameter("anterior")!=null?request.getParameter("anterior"):"";
   %>
 <div class="container">
 	<div class="row">
@@ -74,15 +80,15 @@
 			<th></th>
 			<th></th>
 			<!--  th><a href="LoginServlet?accion=ordenar&orden=usuario">Usuario</a></th-->
-			<th><a href="javascript:ordenar('usuario','<%=sentido%>')">Usuario</a></th>
-			<th><a href="LoginServlet?accion=ordenar&orden=nombre">Nombre</a></th>
-			<th><a href="LoginServlet?accion=ordenar&orden=apellidos">Apellidos</a></th>
-			<th><a href="LoginServlet?accion=ordenar&orden=dni">DNI</a></th>
-			<th><a href="LoginServlet?accion=ordenar&orden=sexo">Genero</a></th>
-			<th><a href="LoginServlet?accion=ordenar&orden=email">E-mail</a></th>
-			<th><a href="LoginServlet?accion=ordenar&orden=telefono">Telefono</a></th>
-			<th><a href="LoginServlet?accion=ordenar&orden=nacimiento">Nacimiento</a></th>
-			<th><a href="LoginServlet?accion=ordenar&orden=rol">Tipo</a></th>
+			<th><a href="javascript:ordenar('usuario','<%=sentido%>','<%=anterior%>')">Usuario</a></th>
+			<th><a href="javascript:ordenar('nombre','<%=sentido%>','<%=anterior%>')">Nombre</a></th>
+			<th><a href="javascript:ordenar('apellidos','<%=sentido%>','<%=anterior%>')">Apellidos</a></th>
+			<th><a href="javascript:ordenar('dni','<%=sentido%>','<%=anterior%>')">DNI</a></th>
+			<th><a href="javascript:ordenar('sexo','<%=sentido%>','<%=anterior%>')">Genero</a></th>
+			<th><a href="javascript:ordenar('email','<%=sentido%>','<%=anterior%>')">E-mail</a></th>
+			<th><a href="javascript:ordenar('telefono','<%=sentido%>','<%=anterior%>')">Telefono</a></th>
+			<th><a href="javascript:ordenar('nacimiento','<%=sentido%>','<%=anterior%>')">Nacimiento</a></th>
+			<th><a href="javascript:ordenar('rol','<%=sentido%>','<%=anterior%>')">Tipo</a></th>
 		</tr>
 		
 <% 
@@ -129,7 +135,7 @@ for (User u: usuarios) {
 			<%indice++;}%>
 		
 	</table>
-	</div>
+
 	
 	<p><a href='userdata.jsp?usuario=""&nombre=""&apellidos=""&dni=""&genero=""
 				&mail=""&nacimiento=01-01-2000&rol=""&clave=""&id=""'>
@@ -137,5 +143,6 @@ for (User u: usuarios) {
 		</div>		
 	</div>			
 </div>
+<jsp:include page="piepagina.html"></jsp:include>
 </body>
 </html>
