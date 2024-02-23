@@ -3,7 +3,9 @@ package servlets;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,7 +16,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import proyectoFinal.Daos.UserDao;
 import proyectoFinal.entities.User;
 import proyectoFinal.enums.EnumUsuarios;
@@ -26,7 +27,7 @@ import proyectoFinal.utils.Utils;
  */
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private List<String> sesiones=new ArrayList<String>();
+	private Map<String, User> sesiones=new HashMap<>();
 	private static final Logger logger = LogManager.getLogger(LoginServlet.class);
 
     /**
@@ -41,7 +42,7 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String usuarioSesion = request.getSession().getId();
-		if (!sesiones.contains(usuarioSesion)) {
+		if (!sesiones.keySet().contains(usuarioSesion)){
 			response.getWriter().append("<H1>Accion no permitida para usuarios no logeados</H1>");
 		}
 		else {	
@@ -128,8 +129,8 @@ public class LoginServlet extends HttpServlet {
 			if (usuario != null) {
 				//guardar la id de sesion para verificar accesos a los metodos
 				String usuarioSesion = request.getSession().getId();
-				if (!sesiones.contains(usuarioSesion)) {
-					sesiones.add(usuarioSesion);
+				if (!sesiones.keySet().contains(usuarioSesion)) {
+					sesiones.put(usuarioSesion, usuario);
 				}
 				
 				request.setAttribute("listaUsuarios", udao.getUsers());
@@ -206,9 +207,15 @@ public class LoginServlet extends HttpServlet {
 	
 		// creo un usuario con los valores de los parametros recibidos
 		User nuevo = rellenaDatosUser(request);
+		
+		// actualizar los datos de usuario en el mapa de sesiones
+		String usuarioSesion = request.getSession().getId();
+		sesiones.put(usuarioSesion, nuevo);
+					
 		// leo de la base de datos el usuario con el id recibido
-		String idString=request.getParameter("id");
-		long id=Long.parseLong(idString);
+				String idString=request.getParameter("id");
+				long id=Long.parseLong(idString);
+				//long id=nuevo.getIdUsuario();
 		UserDao udao= new UserDao();
 		User viejo = udao.getUser(id);
 		
@@ -225,6 +232,10 @@ public class LoginServlet extends HttpServlet {
 		
 		// actualizo la base de datos con el usuario modificado
 		udao.editUser(viejo);
+		
+		
+		
+		// abrir la tabla de usuarios para verla con los datos actualizados
 		request.setAttribute("listaUsuarios", udao.getUsers());
 		RequestDispatcher rd = request.getRequestDispatcher("tablaUsers.jsp");
 		rd.forward(request, response);
