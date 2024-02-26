@@ -59,6 +59,7 @@
 
 </head>
 <body>
+	
 	<jsp:include page="cabecera.html"></jsp:include>
 <%Propiedades pro=new Propiedades();
   long idd;  
