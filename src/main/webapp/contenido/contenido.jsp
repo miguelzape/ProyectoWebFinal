@@ -25,7 +25,7 @@
     <a href="LoginServlet?accion=accesoadmin">Gestionar usuarios</a>
     <a href="https://es.linkedin.com/">Trabajo</a>
     <a href="https://www.filmaffinity.com/es/main.html/">Ocio</a>
-    <a href="#">LogOut</a>
+    <a href="LoginServlet?accion=logout">LogOut</a>
   </nav>
   <blockquote>
  <img src="https://cdn-icons-png.flaticon.com/512/226/226777.png" height="550px"  align="left" >“Java se creó como una herramienta de programación para ser usada en un proyecto de set-top-box en una pequeña operación denominada the Green Project en Sun Microsystems en 1991. El equipo (green team), compuesto por trece personas y dirigido por James Gosling, trabajó durante 18 meses en Sand Hill Road, Menlo Park (California), para desarrollarlo.

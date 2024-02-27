@@ -57,6 +57,9 @@ public class LoginServlet extends HttpServlet {
 			else if (accion.equalsIgnoreCase("accesoadmin")) {
 				accesoAdmin (request, response);
 			}
+			else if (accion.equalsIgnoreCase("logout")) {
+				logOut (request, response);
+			}
 			else {
 				response.getWriter().append("<H1>El metodo doGet ha recibido una accion inesperada</H1>");
 			}
@@ -110,6 +113,17 @@ public class LoginServlet extends HttpServlet {
 		else {
 			response.getWriter().append("<H1>Solo los administradores pueden gestionar usuarios</H1>");
 		}
+	}
+	
+private void logOut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		
+		// cogo el id de la sesion actual
+		String usuarioSesion = request.getSession().getId();
+		// borro del mapa de sesiones los datos
+		sesiones.remove(usuarioSesion);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+		rd.forward(request, response);
 	}
 	
 
