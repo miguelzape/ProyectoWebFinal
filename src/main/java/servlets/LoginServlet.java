@@ -54,6 +54,9 @@ public class LoginServlet extends HttpServlet {
 			else if (accion.equalsIgnoreCase("ordenar")) {
 				ordenar (request, response);
 			}
+			else if (accion.equalsIgnoreCase("accesoadmin")) {
+				accesoAdmin (request, response);
+			}
 			else {
 				response.getWriter().append("<H1>El metodo doGet ha recibido una accion inesperada</H1>");
 			}
@@ -88,6 +91,25 @@ public class LoginServlet extends HttpServlet {
 		request.setAttribute("listaUsuarios", udao.getUsersOrdenados(orden));
 		RequestDispatcher rd = request.getRequestDispatcher("tablaUsers.jsp?sentido="+sentido+"&anterior="+anterior);
 		rd.forward(request, response);
+	}
+	
+	private void accesoAdmin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		
+		// leo los datos de usuario actual desde el mapa de sesiones
+		String usuarioSesion = request.getSession().getId();
+		User actual = sesiones.get(usuarioSesion);
+		
+		if (actual.getRol().toLowerCase().contains("admin")) {
+			logger.trace("se da acceso a la tabla de usuarios");
+	
+			UserDao udao= new UserDao();
+			request.setAttribute("listaUsuarios", udao.getUsers());
+			RequestDispatcher rd = request.getRequestDispatcher("tablaUsers.jsp");
+			rd.forward(request, response);
+		}
+		else {
+			response.getWriter().append("<H1>Solo los administradores pueden gestionar usuarios</H1>");
+		}
 	}
 	
 
@@ -133,8 +155,8 @@ public class LoginServlet extends HttpServlet {
 					sesiones.put(usuarioSesion, usuario);
 				}
 				
-				request.setAttribute("listaUsuarios", udao.getUsers());
-				RequestDispatcher rd = request.getRequestDispatcher("tablaUsers.jsp");
+				request.setAttribute("Usuario", usuario);
+				RequestDispatcher rd = request.getRequestDispatcher("contenido/contenido.jsp");
 				rd.forward(request, response);
 			}
 			else
@@ -149,6 +171,8 @@ public class LoginServlet extends HttpServlet {
 		}
 		
 	}
+	
+	
 	
 	private User rellenaDatosUser(HttpServletRequest request) {
 		String nombre=request.getParameter("nombre")!=null?request.getParameter("nombre"):"";
@@ -169,7 +193,6 @@ public class LoginServlet extends HttpServlet {
 		User u = new User(idusuario,clave,nombre,apellidos,dni,genero,mail,tele,f,rol);
 		return u;
 	}
-
 	
 	
 	private void nuevo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -208,14 +231,20 @@ public class LoginServlet extends HttpServlet {
 		// creo un usuario con los valores de los parametros recibidos
 		User nuevo = rellenaDatosUser(request);
 		
-		// actualizar los datos de usuario en el mapa de sesiones
+		// leo los datos de usuario actual desde el mapa de sesiones
 		String usuarioSesion = request.getSession().getId();
-		sesiones.put(usuarioSesion, nuevo);
+		User actual = sesiones.get(usuarioSesion);
+		
+		//  Si el usuario nuevo(modificado) es el de la sesion actual. se actualiza en el mapa de sesiones
+		if (nuevo.getUsuario()==actual.getUsuario()) {
+			sesiones.put(usuarioSesion, nuevo);
+		}
 					
-		// leo de la base de datos el usuario con el id recibido
-				String idString=request.getParameter("id");
-				long id=Long.parseLong(idString);
-				//long id=nuevo.getIdUsuario();
+		// leo el parametro con el id recibido
+		String idString=request.getParameter("id"); 
+		long id=Long.parseLong(idString);
+		
+		//se lee el usuario de la base de datos con ese id, para poder actualizarlo
 		UserDao udao= new UserDao();
 		User viejo = udao.getUser(id);
 		
@@ -232,8 +261,6 @@ public class LoginServlet extends HttpServlet {
 		
 		// actualizo la base de datos con el usuario modificado
 		udao.editUser(viejo);
-		
-		
 		
 		// abrir la tabla de usuarios para verla con los datos actualizados
 		request.setAttribute("listaUsuarios", udao.getUsers());
