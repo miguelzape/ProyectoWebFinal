@@ -8,9 +8,12 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport">
-	<title>cabecera</title>
-<!-- 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
-	<link href="contenido.css" rel="stylesheet" type="text/css">	
+	<title>contenido</title>
+	<link href="contenido.css" rel="stylesheet" type="text/css">
+	
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<script src="js/bootstrap.bundle.min.js"></script>	
+	
 	<script type="text/javascript">
 		function aviso() {
 			alert("Solo los administradores pueden gestionar usuarios");
@@ -27,12 +30,11 @@
 User usuario = (User)request.getAttribute("Usuario");
 String tipo = usuario.getRol();
 boolean notAdmin = !tipo.toLowerCase().contains("admin");
-//System.out.println("notAdmin= "+notAdmin);
+
 %>
 
 <section class="site">
   <nav>
-<%--     <a href="LoginServlet?accion=accesoadmin" <%if (notAdmin) {%> style="pointer-events: none" style="color: #fcff33" <%}%>>Gestion de usuario</a> --%>
 
 	 <%if (notAdmin) {
  	 	  %><a onclick="aviso()" href="#"><strike>Gestion de usuarios</strike></a><%}
@@ -63,7 +65,7 @@ boolean notAdmin = !tipo.toLowerCase().contains("admin");
   </blockquote>
 </section>
 <jsp:include page="piepagina.html"></jsp:include>
-<!--     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> -->
+
 </body>
 
 </html>
