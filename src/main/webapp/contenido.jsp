@@ -46,7 +46,7 @@ boolean notAdmin = !tipo.toLowerCase().contains("admin");
     <a href="LoginServlet?accion=logout">LogOut</a>
   </nav>
   <blockquote>
-     <img src="imagen2.jpg" height="500px" align="left" >
+     <img src="imagen2.jpg" height="450px" align="left" >
      <ul>
 	<li>Lo que no te mata, te hace más fuerte</li>
 	<li>Aquello que se hace por amor está siempre más allá del bien y del mal</li>
