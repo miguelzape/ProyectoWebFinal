@@ -170,7 +170,7 @@ private void logOut(HttpServletRequest request, HttpServletResponse response) th
 				}
 				
 				request.setAttribute("Usuario", usuario);
-				RequestDispatcher rd = request.getRequestDispatcher("contenido/contenido.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("contenido.jsp");
 				rd.forward(request, response);
 			}
 			else
