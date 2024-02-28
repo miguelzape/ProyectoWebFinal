@@ -11,6 +11,11 @@
 	<title>cabecera</title>
 <!-- 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
 	<link href="contenido.css" rel="stylesheet" type="text/css">	
+	<script type="text/javascript">
+		function aviso() {
+			alert("Solo los administradores pueden gestionar usuarios");
+		} 
+	</script>
 </head>
 
 <body> 
@@ -27,7 +32,13 @@ boolean notAdmin = !tipo.toLowerCase().contains("admin");
 
 <section class="site">
   <nav>
-    <a href="LoginServlet?accion=accesoadmin" <%if (notAdmin) {%> style="pointer-events: none" <%}%>>Gestion de usuario</a>
+<%--     <a href="LoginServlet?accion=accesoadmin" <%if (notAdmin) {%> style="pointer-events: none" style="color: #fcff33" <%}%>>Gestion de usuario</a> --%>
+
+	 <%if (notAdmin) {
+ 	 	  %><a onclick="aviso()" href="#"><strike>Gestion de usuarios</strike></a><%}
+	  else{ 
+		  %><a href="LoginServlet?accion=accesoadmin">Gestion de usuarios</a><%
+	  }%>
     <a href="https://www.rincondelvago.com/">Trabajo</a>
     <a href="https://www.filmaffinity.com/es/main.html">Ocio</a>
     <a href="LoginServlet?accion=logout">LogOut</a>
