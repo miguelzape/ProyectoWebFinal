@@ -36,6 +36,7 @@
 User u = (User)request.getAttribute("Usuario");
 String tipo = u.getRol();
 boolean notAdmin = !tipo.toLowerCase().contains("admin");
+Propiedades pro = new Propiedades();
 
 %>
 
@@ -58,11 +59,10 @@ boolean notAdmin = !tipo.toLowerCase().contains("admin");
 				&clave=<%=u.getClave()%>
 				&id=<%=u.getIdUsuario()%>">Gestion de usuario</a><%}
 	  else{ 
-		  %><a href="LoginServlet?accion=accesoadmin">Gestion de usuarios</a><%
-	  }%>
-    <a href="https://www.rincondelvago.com/">Trabajo</a>
-    <a href="https://www.filmaffinity.com/es/main.html">Ocio</a>
-    <a href="LoginServlet?accion=logout">LogOut</a>
+	 %><a href="LoginServlet?accion=accesoadmin">Gestion de usuarios</a><%}%>
+       <a href="<%=pro.leerProper("Contenido_Enlace_1")%>"><%=pro.leerProper("Contenido_Texto_Enlace_1")%></a>
+       <a href="<%=pro.leerProper("Contenido_Enlace_2")%>"><%=pro.leerProper("Contenido_Texto_Enlace_2")%></a>
+       <a href="LoginServlet?accion=logout">LogOut</a>
   </nav>
 <!--   <blockquote> -->
 <div class="col-12 col-md-6 col-lg-3">

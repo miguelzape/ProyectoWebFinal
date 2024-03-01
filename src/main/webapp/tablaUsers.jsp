@@ -69,14 +69,13 @@ fieldset {
 	<jsp:include page="cabecera.html"></jsp:include>
 	<%
 	Propiedades pro = new Propiedades();
-	long idd;
 	String sentido = request.getParameter("sentido") != null ? request.getParameter("sentido") : " ASC";
 	String anterior = request.getParameter("anterior") != null ? request.getParameter("anterior") : "";
 	%>
 	<div class="container">
 		<div class="row">
 			<div class="col-12 text-center">
-				<h3><%=pro.leerProper("titulo1")%></h3>
+				<h3><%=pro.leerProper("TablaUsers_Cabeza")%></h3>
 			</div>
 		</div>
 
@@ -123,12 +122,12 @@ fieldset {
 				
 				&clave=<%=u.getClave()%>
 				&id=<%=u.getIdUsuario()%>">
-					<%idd = u.getIdUsuario();%> 
+					<%long idU = u.getIdUsuario();%> 
 					<img border="0" alt="modificar" src="modify.png" width="16" height="16">
 						</a></td>
 
 						<td><img role="button" alt="borrar" src="delete.png"
-							width="16" height="16" onclick="borradoSeguro(<%=idd%>)"></td>
+							width="16" height="16" onclick="borradoSeguro(<%=idU%>)"></td>
 
 						<td><%=u.getUsuario()%></td>
 						<td><%=u.getNombre()%></td>

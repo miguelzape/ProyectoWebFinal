@@ -31,7 +31,7 @@ public class Propiedades {
 	}
 	
 	public String leerProper(String key) {
-		return parametros.get(key);
+		return parametros.get(key.toLowerCase());
 	}
 	
 }
