@@ -6,12 +6,17 @@
 <html lang="es-ES">
 
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport">
+
+
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport">
+
 	<title>contenido</title>
 	<link href="contenido.css" rel="stylesheet" type="text/css">
 	
 	<link rel="stylesheet" href="css/bootstrap.min.css">
+	
 	<script src="js/bootstrap.bundle.min.js"></script>	
 	
 	<script type="text/javascript">
@@ -20,26 +25,38 @@
 		} 
 	</script>
 </head>
-
-<body> 
 <jsp:include page="cabecera.html"></jsp:include>
+<body> 
+ 
 <div class="container">
 
 
 <% 
 
-User usuario = (User)request.getAttribute("Usuario");
-String tipo = usuario.getRol();
+User u = (User)request.getAttribute("Usuario");
+String tipo = u.getRol();
 boolean notAdmin = !tipo.toLowerCase().contains("admin");
 
 %>
 
 <div class="row">
 <section class="site">
+  
   <nav>
-
+  	<a href="https://wey-yu.net/home"><img src="wey-yu-transparent.png" width="80"></a>
 	 <%if (notAdmin) {
- 	 	  %><a onclick="aviso()" href="#"><strike>Gestion de usuarios</strike></a><%}
+ 	 	  %><a href="userdata.jsp?usuario=<%=u.getUsuario()%>
+				&retorno=contenido&nombre=<%=u.getNombre()%>
+				&apellidos=<%=u.getApellidos()%>
+				&dni=<%=u.getDni()%>
+				&genero=<%=u.getSexo()%>
+				&mail=<%=u.getEmail()%>
+				&telefono=<%=u.getTelefono()%>
+	    		&nacimiento=<%=Utils.dateToString(u.getNacimiento())%>   
+				&rol=<%=u.getRol()%>
+				
+				&clave=<%=u.getClave()%>
+				&id=<%=u.getIdUsuario()%>">Gestion de usuario</a><%}
 	  else{ 
 		  %><a href="LoginServlet?accion=accesoadmin">Gestion de usuarios</a><%
 	  }%>
@@ -74,8 +91,8 @@ boolean notAdmin = !tipo.toLowerCase().contains("admin");
 </section>
 </div>
 </div>
-<jsp:include page="piepagina.html"></jsp:include>
+
 
 </body>
-
+<jsp:include page="piepagina.html"></jsp:include>
 </html>

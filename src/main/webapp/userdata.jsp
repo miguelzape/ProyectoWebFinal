@@ -53,6 +53,7 @@
 	   String p_clav = request.getParameter("clave") != null?request.getParameter("clave"):"";
 	   String p_rol = request.getParameter("rol") != null?request.getParameter("rol"):"";
 	   String p_id = request.getParameter("id")!=null?request.getParameter("id"):"ninguno";
+	   String retorno = request.getParameter("retorno")!=null?request.getParameter("retorno"):"ninguno";
 
 %>
 
@@ -66,7 +67,7 @@
 
 
 	<form name="formulario1" action="LoginServlet?accion=
-	<% if (modificar){%>modificar<%}else{%>nuevo<%}%>&id=<%=p_id%>" 
+	<% if (modificar){%>modificar<%}else{%>nuevo<%}%>&id=<%=p_id%>&retorno=<%=retorno%>" 
 	onsubmit="return validarForm()" method="post">
 	<table align="center" cellpadding = "10">
 	

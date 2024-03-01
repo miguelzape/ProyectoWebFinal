@@ -259,6 +259,7 @@ private void logOut(HttpServletRequest request, HttpServletResponse response) th
 	
 		// creo un usuario con los valores de los parametros recibidos
 		User nuevo = rellenaDatosUser(request);
+	    String retorno = request.getParameter("retorno")!=null?request.getParameter("retorno"):"ninguno";
 		
 		// leo los datos de usuario actual desde el mapa de sesiones
 		String usuarioSesion = request.getSession().getId();
@@ -292,9 +293,16 @@ private void logOut(HttpServletRequest request, HttpServletResponse response) th
 		udao.editUser(viejo);
 		
 		// abrir la tabla de usuarios para verla con los datos actualizados
-		request.setAttribute("listaUsuarios", udao.getUsers());
-		RequestDispatcher rd = request.getRequestDispatcher("tablaUsers.jsp");
-		rd.forward(request, response);
+		if (retorno.equalsIgnoreCase("contenido")) {
+			// ir a contenido pasandolo solo el usuario actual
+			contenido(request, response);	
+		}
+		else {
+			// ir a la tabla de usarios pasandole la lista completa de usuario
+			request.setAttribute("listaUsuarios", udao.getUsers());
+			RequestDispatcher rd = request.getRequestDispatcher("tablaUsers.jsp");
+			rd.forward(request, response);
+		}
 	}
 	
 
