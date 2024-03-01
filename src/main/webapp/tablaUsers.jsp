@@ -58,28 +58,62 @@ fieldset {
 		window.location.href = enlace;
 	}
 	
+	function filtrar() {
+		
+ 		var campo = document.getElementById('filtrocampo').value;
+ 		alert("llamado a filtar campo= "+campo);
+ 		var valor = document.getElementById('filtrovalor').value;
+ 		alert("llamado a filtar campo= "+campo+" valor= "+valor);
+		
+// 		window.location.href = "LoginServlet?accion=filtrar&campo="+campo+"&valor="+valor;
+		
+// 		alert("llamado a filtar");
+	}
+	
 </script>
 
 
 
 
 </head>
-<body>
 
-	<jsp:include page="cabecera.html"></jsp:include>
+<body>
+<jsp:include page="cabecera.html"></jsp:include>
+	
 	<%
 	Propiedades pro = new Propiedades();
 	String sentido = request.getParameter("sentido") != null ? request.getParameter("sentido") : " ASC";
 	String anterior = request.getParameter("anterior") != null ? request.getParameter("anterior") : "";
 	%>
 	<div class="container">
-		<div class="row">
+		
+		<div class="row mt-2">
 			<div class="col-12 text-center">
 				<h3><%=pro.leerProper("TablaUsers_Cabeza")%></h3>
 			</div>
 		</div>
+		<div class="row mt-3">
+			<div class="col-1"></div>
+		
+			<div class="col-3 justify-content-center">
+				Valor<input type="text" name="filtrovalor" maxlength="30" size="30" value="">
+			</div>
+			<div class="col-4 justify-content-center">
+			Filtro<select name="filtrocampo" id="filtrocampo">
+					<option value="nombre">por nombre</option>
+	  				<option value="genero">por genero</option>
+	  				<option value="rol">por rol</option>
+	 		</select>
+	 		</div>
+	 		
+	 		<div class="col-3 justify-content-center">
+	 			 <button type="button" onclick="filtrar()">Buscar</button> 
+	 		</div>
+	 		
+	 		<div class="col-1"></div>
+		</div>
 
-		<div class="row">
+		<div class="row mt-3">
 			<div class="col">
 				<table class="table table-striped table-primary" align="center"
 					cellpadding="10">

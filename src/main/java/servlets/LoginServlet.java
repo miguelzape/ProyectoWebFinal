@@ -54,6 +54,9 @@ public class LoginServlet extends HttpServlet {
 			else if (accion.equalsIgnoreCase("ordenar")) {
 				ordenar (request, response);
 			}
+			else if (accion.equalsIgnoreCase("filtrar")) {
+				filtrar (request, response);
+			}
 			else if (accion.equalsIgnoreCase("accesoadmin")) {
 				accesoAdmin (request, response);
 			}
@@ -97,6 +100,13 @@ public class LoginServlet extends HttpServlet {
 		request.setAttribute("listaUsuarios", udao.getUsersOrdenados(orden));
 		RequestDispatcher rd = request.getRequestDispatcher("tablaUsers.jsp?sentido="+sentido+"&anterior="+anterior);
 		rd.forward(request, response);
+	}
+	
+	private void filtrar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		String campo=request.getParameter("campo")!=null?request.getParameter("campo"):"";
+		String valor=request.getParameter("valor")!=null?request.getParameter("valor"):"";
+		response.getWriter().append("<H1>Filtrado. campo= "+campo+" valor= "+valor+"</H1>");
+		
 	}
 	
 	private void accesoAdmin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
