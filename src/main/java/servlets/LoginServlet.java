@@ -60,6 +60,9 @@ public class LoginServlet extends HttpServlet {
 			else if (accion.equalsIgnoreCase("logout")) {
 				logOut (request, response);
 			}
+			else if (accion.equalsIgnoreCase("contenido")) {
+				contenido (request, response);
+			}
 			else {
 				response.getWriter().append("<H1>El metodo doGet ha recibido una accion inesperada</H1>");
 			}
@@ -153,6 +156,18 @@ private void logOut(HttpServletRequest request, HttpServletResponse response) th
 				
 	}
 	
+
+	private void contenido(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		
+		String usuarioSesion = request.getSession().getId();
+		User u = sesiones.get(usuarioSesion);
+		
+		request.setAttribute("Usuario", u);
+		RequestDispatcher rd = request.getRequestDispatcher("contenido.jsp");
+		rd.forward(request, response);
+	}
+	
+
 	
 	private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		

@@ -23,6 +23,7 @@
 
 <body> 
 <jsp:include page="cabecera.html"></jsp:include>
+<div class="container">
 
 
 <% 
@@ -33,6 +34,7 @@ boolean notAdmin = !tipo.toLowerCase().contains("admin");
 
 %>
 
+<div class="row">
 <section class="site">
   <nav>
 
@@ -45,8 +47,13 @@ boolean notAdmin = !tipo.toLowerCase().contains("admin");
     <a href="https://www.filmaffinity.com/es/main.html">Ocio</a>
     <a href="LoginServlet?accion=logout">LogOut</a>
   </nav>
-  <blockquote>
+<!--   <blockquote> -->
+<div class="col-12 col-md-6 col-lg-3">
      <img src="imagen2.jpg" height="450px" align="left" >
+</div>
+
+
+<div class="col-12 col-md-6 col-lg-9">
      <ul>
 	<li>Lo que no te mata, te hace más fuerte</li>
 	<li>Aquello que se hace por amor está siempre más allá del bien y del mal</li>
@@ -62,8 +69,11 @@ boolean notAdmin = !tipo.toLowerCase().contains("admin");
      </ul>
 
 ― friedrich nietzsche
-  </blockquote>
+</div>
+<!--   </blockquote> -->
 </section>
+</div>
+</div>
 <jsp:include page="piepagina.html"></jsp:include>
 
 </body>

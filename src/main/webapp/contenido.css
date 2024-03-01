@@ -26,7 +26,7 @@ img{
   background-color: #efefef;
   font-size: .8em;
   color: #444;
-  position:relative
+ /*  position:relative*/ 
 }
 .site a {
   color: #666;

@@ -137,10 +137,14 @@ for (User u: usuarios) {
 		
 	</table>
 
+	<nav>
+		<a href='userdata.jsp?usuario=""&nombre=""&apellidos=""&dni=""&genero=""
+					&mail=""&nacimiento=01-01-2000&rol=""&clave=""&id=""'>
+					Crear nuevo usuario</a>
+					
+		<a href='LoginServlet?accion=contenido'>Volver a contenido</a>	
+	</nav>
 	
-	<p><a href='userdata.jsp?usuario=""&nombre=""&apellidos=""&dni=""&genero=""
-				&mail=""&nacimiento=01-01-2000&rol=""&clave=""&id=""'>
-				Crear nuevo usuario</a></p>
 		</div>		
 	</div>			
 </div>
