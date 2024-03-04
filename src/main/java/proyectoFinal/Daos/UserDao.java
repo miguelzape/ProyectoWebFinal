@@ -24,13 +24,15 @@ public class UserDao {
 		em=null;
 	}
 
-	//cRud READ
+	// cRud READ
+	// lee todos los usuarios y los devuelve en una lista
 	public List<User> getUsers() {
 		logger.trace("DAO. Leer todos los usuarios");
 		return em.createQuery("from User", User.class).getResultList();
 	}
 	
-	//cRud READ
+	// cRud READ
+	// lee todos los usuarios y los devuelve en una lista ordenada por el 'campo'
 	public List<User> getUsersOrdenados(String campo) {
 		
 		String cadena = "from User c order by c."+campo;
@@ -66,14 +68,6 @@ public class UserDao {
 		}
 		return null;
 	}
-
-//	//cRud READ
-//	public List<User> getUserByUsuario(String usuario) {
-//		logger.trace("DAO. Leer un usuario buscando por campo usuario");
-//		TypedQuery<User> query = em.createQuery("from User c where c.usuario=?1", User.class);
-//		query.setParameter(1, usuario);
-//		return query.getResultList();
-//	}
 	
 	//cRud READ
 	public User getUser(long id) {
