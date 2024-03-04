@@ -17,6 +17,16 @@
 	
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<script src="js/bootstrap.bundle.min.js"></script>	
+	<script type="text/javascript">
+				function confirmarLogOut() {
+				var mensaje = confirm("¿Quiere cerrar la sesión?");
+	
+				if (mensaje) {
+						var enlace="LoginServlet?accion=logout";
+						window.location.href = enlace;
+				}   
+				}
+		</script>
 	
 </head>
 
@@ -54,10 +64,10 @@ Propiedades pro = new Propiedades();
 				&clave=<%=u.getClave()%>
 				&id=<%=u.getIdUsuario()%>">Gestion de usuario</a><%}
 	  else{ 
-	 %><a href="LoginServlet?accion=accesoadmin">Gestion de usuarios</a><%}%>
+	 %><a href="LoginServlet?accion=ordenar">Gestion de usuarios</a><%}%>
        <a href="<%=pro.leerProper("Contenido_Enlace_1")%>"><%=pro.leerProper("Contenido_Texto_Enlace_1")%></a>
        <a href="<%=pro.leerProper("Contenido_Enlace_2")%>"><%=pro.leerProper("Contenido_Texto_Enlace_2")%></a>
-       <a href="LoginServlet?accion=logout"><%=pro.leerProper("Contenido_Texto_Enlace_LogOut")%></a>
+       <a href="javascript:confirmarLogOut()"><%=pro.leerProper("Contenido_Texto_Enlace_LogOut")%></a>
   </nav>
 <!--   <blockquote> -->
 <div class="col-12 col-md-6 col-lg-3">

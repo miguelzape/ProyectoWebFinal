@@ -15,13 +15,11 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
-
-
 @Entity
 @Table(name="TB_USERS")
 public class User implements Serializable{
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 4175749941124050687L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -154,8 +152,8 @@ public class User implements Serializable{
 	//metodo toString
 	@Override
 	public String toString() {
-		return "User [idUsuario=" + idUsuario + ", usuario=" + usuario + ", clave=" + new String(clave)
-				+ ", nombre=" + nombre + ", apellidos=" + apellidos + ", dni=" + dni + ", sexo=" + sexo + ", email="
+		return "User [idUsuario=" + idUsuario + ", usuario=" + usuario + ", nombre=" + nombre + 
+				", apellidos=" + apellidos + ", dni=" + dni + ", sexo=" + sexo + ", email="
 				+ email + ", telefono=" + telefono + ", nacimiento=" + nacimiento + "]";
 	}
 	

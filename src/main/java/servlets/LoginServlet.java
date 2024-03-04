@@ -30,16 +30,12 @@ public class LoginServlet extends HttpServlet {
 	private Map<String, User> sesiones=new HashMap<>();
 	private static final Logger logger = LogManager.getLogger(LoginServlet.class);
 
-    /**
-     * Default constructor. 
-     */
+    // Constructor vacio
     public LoginServlet() {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String usuarioSesion = request.getSession().getId();
 		if (!sesiones.keySet().contains(usuarioSesion)){
@@ -48,7 +44,6 @@ public class LoginServlet extends HttpServlet {
 		else {	
 			String accion=request.getParameter("accion");
 			if (accion.equalsIgnoreCase("borrar")) {
-				//System.out.println("recibido mensaje de borrar ");
 				borrar (request, response);
 			}
 			else if (accion.equalsIgnoreCase("ordenar")) {
@@ -57,14 +52,11 @@ public class LoginServlet extends HttpServlet {
 			else if (accion.equalsIgnoreCase("filtrar")) {
 				filtrar (request, response);
 			}
-			else if (accion.equalsIgnoreCase("accesoadmin")) {
-				accesoAdmin (request, response);
-			}
 			else if (accion.equalsIgnoreCase("logout")) {
 				logOut (request, response);
 			}
 			else if (accion.equalsIgnoreCase("contenido")) {
-				contenido (request, response);
+				mostrarContenido (request, response);
 			}
 			else {
 				response.getWriter().append("<H1>El metodo doGet ha recibido una accion inesperada</H1>");
@@ -73,6 +65,9 @@ public class LoginServlet extends HttpServlet {
 		
 	}
 	
+	// necesita el parameter 'id' (String) con el identificador del usuario que se quiere borrar
+	// devuelve a 'tablaUsers.jsp'
+	//	      el parameter 'listaUsuarios' (List<User>) con una lista de usuarios.
 	private void borrar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 			
 		String Cadenaid=request.getParameter("id");
@@ -86,12 +81,17 @@ public class LoginServlet extends HttpServlet {
 			
 	}
 		
+	// necesita el paremeter 'orden' (String) Es el campo por el que se ordena + (opcional) " ASC" o " DESC" 
+	// devuelve a 'tablaUsers.jsp'
+	//	      el parameter 'listaUsuarios' (List<User>) con una lista de usuarios ordenados.
+	//	      el parameter 'sentido' (String) ' ASC' o ' DESC' que es el proximo sentido en caso de reordenar por el mismo campo
+	//	      el parameter 'anterior' (String) Es el campo por el que acaba de ordenar 
 	private void ordenar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		String orden=request.getParameter("orden")!=null?request.getParameter("orden"):"";
-		String sentido = orden.contains("ASC")?" DESC":" ASC";
+		String orden=request.getParameter("orden")!=null?request.getParameter("orden"):"nombre";
+		String sentido = orden.contains("ASC") ? " DESC" : " ASC";
 		int pos = orden.indexOf(" ");
 		
-		String anterior=(pos>0)?orden.substring(0, pos):"ninguno";
+		String anterior=(pos>0)?orden.substring(0, pos):orden; 
 		
 		String traza = "Se recibe ordenar por: " + anterior + " en orden contrario a"+sentido;
 		logger.trace(traza);
@@ -102,6 +102,10 @@ public class LoginServlet extends HttpServlet {
 		rd.forward(request, response);
 	}
 	
+	// necesita el paremeter 'campo' (String) Es el campo por el que se filtra
+	// necesita el paremeter 'valor' (String) Es el valor que se busca en el campo anterior
+	// devuelve a 'tablaUsers.jsp'
+	//	      el parameter 'listaUsuarios' (List<User>) con una lista de usuarios.
 	private void filtrar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		String campo=request.getParameter("campo")!=null?request.getParameter("campo"):"";
 		String valor=request.getParameter("valor")!=null?request.getParameter("valor"):"";
@@ -109,26 +113,10 @@ public class LoginServlet extends HttpServlet {
 		
 	}
 	
-	private void accesoAdmin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		
-		// leo los datos de usuario actual desde el mapa de sesiones
-		String usuarioSesion = request.getSession().getId();
-		User actual = sesiones.get(usuarioSesion);
-		
-		if (actual.getRol().toLowerCase().contains("admin")) {
-			logger.trace("se da acceso a la tabla de usuarios");
 	
-			UserDao udao= new UserDao();
-			request.setAttribute("listaUsuarios", udao.getUsers());
-			RequestDispatcher rd = request.getRequestDispatcher("tablaUsers.jsp");
-			rd.forward(request, response);
-		}
-		else {
-			response.getWriter().append("<H1>Solo los administradores pueden gestionar usuarios</H1>");
-		}
-	}
-	
-private void logOut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	// no necesita parameters
+	// si la sesion actual esta registrada la elimina y abre 'index.jsp' sin parameters
+	private void logOut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		
 		// cogo el id de la sesion actual
 		String usuarioSesion = request.getSession().getId();
@@ -140,9 +128,6 @@ private void logOut(HttpServletRequest request, HttpServletResponse response) th
 	}
 	
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		//HttpSession sesion = request.getSession();
@@ -151,7 +136,7 @@ private void logOut(HttpServletRequest request, HttpServletResponse response) th
 			response.getWriter().append("<H1>Llamada a LoginServlet incompleta</H1>");
 		} 
 		else if (accion.equalsIgnoreCase("login")) {
-			login (request, response);
+			logIn (request, response);
 		}
 		else if (accion.equalsIgnoreCase("nuevo")) {
 			nuevo (request, response);
@@ -166,8 +151,11 @@ private void logOut(HttpServletRequest request, HttpServletResponse response) th
 				
 	}
 	
-
-	private void contenido(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	// se llama desde 'tablaUsers.jsp' si se pulsa el enlace 'volver a contenido'
+	//  y desde los metodos 'login' y 'modificar'
+	// devuelve a 'contenido.jsp'
+	//     el parameter 'Usuario' (User) con el usuario de la sesion actual.
+	private void mostrarContenido(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		
 		String usuarioSesion = request.getSession().getId();
 		User u = sesiones.get(usuarioSesion);
@@ -178,8 +166,13 @@ private void logOut(HttpServletRequest request, HttpServletResponse response) th
 	}
 	
 
-	
-	private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	// necesita el paremeter 'userCaja' (String) Con el usuario (el nombre de usuario es otra cosa)
+	// necesita el paremeter 'passWordCaja' (String) Con la clave
+	// si los datos ESTAN registrados devuelve a 'contenido.jsp'
+	//	      el parameter 'Usuario' (User) con el usuario de la sesion actual.
+	// si los datos NO ESTAN registrados devuelve a 'index.jsp'
+	//	      el parameter 'msg' (String) con el texto 'Credenciales incorrectas'
+	private void logIn(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		
 		if (request.getParameter("userCaja")!=null && request.getParameter("passwordCaja")!=null) {
 			String userCaja=request.getParameter("userCaja");
@@ -193,10 +186,7 @@ private void logOut(HttpServletRequest request, HttpServletResponse response) th
 				if (!sesiones.keySet().contains(usuarioSesion)) {
 					sesiones.put(usuarioSesion, usuario);
 				}
-				
-				request.setAttribute("Usuario", usuario);
-				RequestDispatcher rd = request.getRequestDispatcher("contenido.jsp");
-				rd.forward(request, response);
+				mostrarContenido(request, response);
 			}
 			else
 			{
@@ -212,7 +202,8 @@ private void logOut(HttpServletRequest request, HttpServletResponse response) th
 	}
 	
 	
-	
+	// recoge los paremeters con 'request.getParameter'para crear un objeto User
+	// devuelve el objeto User con los campos rellenos
 	private User rellenaDatosUser(HttpServletRequest request) {
 		String nombre=request.getParameter("nombre")!=null?request.getParameter("nombre"):"";
 		String apellidos=request.getParameter("apellidos")!=null?request.getParameter("apellidos"):"";
@@ -233,7 +224,12 @@ private void logOut(HttpServletRequest request, HttpServletResponse response) th
 		return u;
 	}
 	
-	
+	// necesita todos los parameters que se envian desde el formulario de 'userdata.jsp'
+	// si el 'usuario' ESTA registrado, devuelve a 'userdata.jsp'
+	//	      todos los parameters que se recibieron del formulario de 'userdata.jsp'    
+	//	      el parameter 'msg' (String) con el texto 'Ya existe el usuario '+usuario.
+	// si el 'usuario' NO ESTA registrado, devuelve a 'tablaUsers.jsp'
+	//	      el parameter 'listaUsuarios' (List<User>) con la lista de usuarios.
 	private void nuevo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 					
 	User u = rellenaDatosUser(request);
@@ -248,8 +244,7 @@ private void logOut(HttpServletRequest request, HttpServletResponse response) th
 		enlace ="userdata.jsp?usuario=\"\"&nombre="+u.getNombre()+"&apellidos="+u.getApellidos()+
 				"&dni="+u.getDni()+"&genero="+u.getSexo()+"&mail="+u.getEmail()+
 				"&telefono="+u.getTelefono()+"&nacimiento="+fecha+"&rol="+u.getRol()+
-				"&clave="+u.getClave()+"&msg=Ya existe el usuario " + u.getUsuario();
-		System.out.println(enlace);
+				"&clave="+u.getClave()+"&msg=Ya existe el usuario " + u.getUsuario();	
 	}
 	
 	else {
@@ -257,14 +252,20 @@ private void logOut(HttpServletRequest request, HttpServletResponse response) th
 		request.setAttribute("listaUsuarios", udao.getUsers());
 		enlace="tablaUsers.jsp"; 
 	}
-	
+	logger.trace(enlace);
 	RequestDispatcher rd = request.getRequestDispatcher(enlace);
 	rd.forward(request, response);
-	
-	
 	}
 	
 	
+	// necesita todos los parameters que se envian desde el formulario de 'userdata.jsp'
+	// necesita el paremeter 'retorno' (String) para saber a que JSP hay que llamar al final
+	// actualiza el usuario recibido por parameters en la base de datos y en el mapa sesiones
+	// si 'retorno' ES IGUA A 'contenido', se devuelve a 'contenido.jsp'
+	//			el parameter 'Usuario' (User) con el usuario de la sesion actual.
+	// si 'retorno' ES DISTINTO DE 'contenido', se devuelve a 'tablaUsers.jsp'
+	//	      el parameter 'listaUsuarios' (List<User>) con la lista de usuarios.
+
 	private void modificar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 	
 		// creo un usuario con los valores de los parametros recibidos
@@ -305,7 +306,7 @@ private void logOut(HttpServletRequest request, HttpServletResponse response) th
 		// abrir la tabla de usuarios para verla con los datos actualizados
 		if (retorno.equalsIgnoreCase("contenido")) {
 			// ir a contenido pasandolo solo el usuario actual
-			contenido(request, response);	
+			mostrarContenido(request, response);	
 		}
 		else {
 			// ir a la tabla de usarios pasandole la lista completa de usuario

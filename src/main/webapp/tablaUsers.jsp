@@ -48,26 +48,18 @@ fieldset {
 	}
 	
 	function ordenar(campo, sentido, anterior) {
-		if (campo==anterior){
-			var enlace="LoginServlet?accion=ordenar&orden="+campo+sentido;
-	    }
-		else
-			{
-			var enlace="LoginServlet?accion=ordenar&orden="+campo+" ASC";
-			}
+	    var enlace=("LoginServlet?accion=ordenar&orden="+campo);
+	    enlace = (campo==anterior) ? (enlace+sentido) : (enlace+" ASC");
 		window.location.href = enlace;
 	}
 	
 	function filtrar() {
 		
  		var campo = document.getElementById('filtrocampo').value;
- 		alert("llamado a filtar campo= "+campo);
  		var valor = document.getElementById('filtrovalor').value;
- 		alert("llamado a filtar campo= "+campo+" valor= "+valor);
 		
-// 		window.location.href = "LoginServlet?accion=filtrar&campo="+campo+"&valor="+valor;
-		
-// 		alert("llamado a filtar");
+ 		window.location.href = "LoginServlet?accion=filtrar&campo="+campo+"&valor="+valor;
+
 	}
 	
 </script>
@@ -96,7 +88,7 @@ fieldset {
 			<div class="col-1"></div>
 		
 			<div class="col-3 justify-content-center">
-				Valor<input type="text" name="filtrovalor" maxlength="30" size="30" value="">
+				Valor<input type="text" name="filtrovalor" id="filtrovalor" maxlength="30" size="30" value="">
 			</div>
 			<div class="col-4 justify-content-center">
 			Filtro<select name="filtrocampo" id="filtrocampo">
@@ -181,11 +173,9 @@ fieldset {
 				</table>
 
 				<nav>
-					<a
-						href='userdata.jsp?usuario=""&nombre=""&apellidos=""&dni=""&genero=""
-					&mail=""&nacimiento=01-01-2000&rol=""&clave=""&id=""'>
-						Crear nuevo usuario</a> <a href='LoginServlet?accion=contenido'>Volver
-						a contenido</a>
+					<a href='userdata.jsp?usuario=""&nombre=""&apellidos=""&dni=""&genero=""
+					     &mail=""&nacimiento=01-01-2000&rol=""&clave=""&id=""'>Crear nuevo usuario</a> 
+					<a href='LoginServlet?accion=contenido'>Volver a contenido</a>
 				</nav>
 
 			</div>

@@ -24,13 +24,13 @@ public class UserDao {
 		em=null;
 	}
 
-	//cRud
+	//cRud READ
 	public List<User> getUsers() {
 		logger.trace("DAO. Leer todos los usuarios");
 		return em.createQuery("from User", User.class).getResultList();
 	}
 	
-	//cRud
+	//cRud READ
 	public List<User> getUsersOrdenados(String campo) {
 		
 		String cadena = "from User c order by c."+campo;
@@ -46,7 +46,7 @@ public class UserDao {
 	 * @param clave
 	 * @return Devuelve un objeto de tipo User
 	 */
-	//cRud
+	//cRud READ
 	public User validarUser(String usuario, String clave) {
 		logger.trace("DAO. Validar si el usuario y clave son validos");
 		
@@ -67,23 +67,23 @@ public class UserDao {
 		return null;
 	}
 
-	//cRud
-	public List<User> getUserByUsuario(String usuario) {
-		logger.trace("DAO. Leer un usuario buscando por campo usuario");
-		TypedQuery<User> query = em.createQuery("from User c where c.usuario=?1", User.class);
-		query.setParameter(1, usuario);
-		return query.getResultList();
-	}
+//	//cRud READ
+//	public List<User> getUserByUsuario(String usuario) {
+//		logger.trace("DAO. Leer un usuario buscando por campo usuario");
+//		TypedQuery<User> query = em.createQuery("from User c where c.usuario=?1", User.class);
+//		query.setParameter(1, usuario);
+//		return query.getResultList();
+//	}
 	
-	//cRud
+	//cRud READ
 	public User getUser(long id) {
-	logger.trace("DAO. Leer un usuario buscando por su id");
+	logger.trace("DAO. Leer un usuario buscando por su id= "+id);
 	   return em.find(User.class, id);
 	}
 
-	//cRud
+	//cRud READ
 	public boolean existUsuario(String usuario) {
-		logger.trace("DAO. Comprobar si existe un identificador de usuario");
+		logger.trace("DAO. Comprobar si existe el usuario= "+usuario);
 		
 		TypedQuery<User> query = em.createQuery("from User c where c.usuario=?1", User.class);
 		query.setParameter(1, usuario);
@@ -91,9 +91,9 @@ public class UserDao {
 
 	}
 
-	//Crud
+	//Crud CREATE
 	public void putUser(User u) {
-		logger.trace("DAO. Crear un usuario nuevo");
+		logger.trace("DAO. Crear un usuario nuevo= "+u.getUsuario());
 		em.getTransaction().begin();
 		try {
 			em.persist(u);
@@ -104,9 +104,9 @@ public class UserDao {
 		}
 	}
 
-	//cruD
+	//cruD DELETE
 	public void deleteUser(long id) {
-		logger.trace("DAO. Eliminar un usuario usando su id");
+		logger.trace("DAO. Eliminar un usuario usando su id= "+id);
 		try {
 			User user = em.find(User.class, id);
 
@@ -119,9 +119,9 @@ public class UserDao {
 		}
 	}
 	
-	//crUd
+	//crUd UPDATE
 	public void editUser(User user) {
-		logger.trace("DAO. Editar un usuario");
+		logger.trace("DAO. Editar un usuario= "+user.getUsuario());
 		try {
 			em.getTransaction().begin();
 			em.merge(user);
