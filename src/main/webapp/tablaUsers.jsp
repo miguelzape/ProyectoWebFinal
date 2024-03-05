@@ -94,7 +94,7 @@ fieldset {
 			Filtro<select name="filtrocampo" id="filtrocampo">
 					<option value="0">No filtrar</option>
 					<option value="nombre">por nombre</option>
-	  				<option value="genero">por genero</option>
+	  				<option value="sexo">por genero</option>
 	  				<option value="rol">por rol</option>
 	 		</select>
 	 		</div>
