@@ -2,7 +2,7 @@ package proyectoFinal;
 
 import java.util.Date;
 
-import proyectoFinal.Daos.UserDao;
+import proyectoFinal.daos.UserDao;
 import proyectoFinal.entities.User;
 import proyectoFinal.enums.EnumUsuarios;
 import proyectoFinal.utils.EnumColor;

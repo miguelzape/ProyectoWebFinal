@@ -1,4 +1,4 @@
-package proyectoFinal.Daos;
+package proyectoFinal.daos;
 
 import java.util.List;
 import jakarta.persistence.EntityManager;

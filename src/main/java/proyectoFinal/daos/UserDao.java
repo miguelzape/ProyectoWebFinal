@@ -1,4 +1,4 @@
-package proyectoFinal.Daos;
+package proyectoFinal.daos;
 
 import java.util.List;
 
@@ -37,6 +37,22 @@ public class UserDao {
 		
 		String cadena = "from User c order by c."+campo;
 		logger.trace("DAO. Leer todos los usuarios ordenador por un campo: "+cadena);
+		return em.createQuery(cadena, User.class).getResultList();
+	}
+	
+	
+	// cRud READ
+	// lee todos los usuarios y los devuelve en una lista ordenada por el 'ordenCampo'
+	// y filtrada por 'filtroCampo' con el valor 'filtroValor) 
+	public List<User> getUsersOrdenados(String ordenCampo, String filtroCampo, String filtroValor) {
+		
+		String cadena = "from User c";
+		cadena = (filtroCampo!=null && !filtroCampo.equals("0"))?
+				 (cadena+" where c."+filtroCampo+"='"+filtroValor+"'"):cadena;
+		cadena = (ordenCampo!=null && !ordenCampo.equals(""))?
+				 (cadena+" order by c."+ordenCampo):cadena;
+		
+		logger.trace("DAO. Leer usuarios filtrados por un campo: "+cadena);
 		return em.createQuery(cadena, User.class).getResultList();
 	}
 

@@ -25,6 +25,10 @@
 		<Logger name="servlets" level="trace" additivity="false">
 			<AppenderRef ref="LogToConsole" />
 		</Logger>
+		<Logger name="proyectoFinal/daos" level="trace" additivity="false">
+			<AppenderRef ref="LogToConsole" />
+		</Logger>
+		
 <!-- 		<Logger name="curso.java.hibernate" level="debug" -->
 <!-- 			additivity="false"> -->
 <!-- 			<AppenderRef ref="LogToConsole" /> -->

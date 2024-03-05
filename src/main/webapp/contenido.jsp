@@ -49,7 +49,7 @@ Propiedades pro = new Propiedades();
 <section class="site">
   
   <nav>
-  	<a href="https://wey-yu.net/home"><img src="wey-yu-transparent.png" width="80"></a>
+  	<a href="https://weyland-yutani.proffer.dev/"><img src="wey-yu-transparent.png" width="80"></a>
 	 <%if (notAdmin) {
  	 	  %><a href="userdata.jsp?usuario=<%=u.getUsuario()%>
 				&retorno=contenido&nombre=<%=u.getNombre()%>
