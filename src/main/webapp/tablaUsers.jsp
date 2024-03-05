@@ -85,13 +85,13 @@ fieldset {
 			</div>
 		</div>
 		<div class="row mt-3">
-			<div class="col-1"></div>
+			
 		
-			<div class="col-3 justify-content-center">
-				Valor<input type="text" name="filtrovalor" id="filtrovalor" maxlength="30" size="30" value="">
+			<div class="col-4 justify-content-center">
+				Valor<input type="text" class="btn btn-outline-primary" name="filtrovalor" id="filtrovalor" maxlength="30" size="30" value="">
 			</div>
 			<div class="col-4 justify-content-center">
-			Filtro<select name="filtrocampo" id="filtrocampo">
+			Filtro<select name="filtrocampo" id="filtrocampo" class="btn btn-outline-primary">
 					<option value="0">No filtrar</option>
 					<option value="nombre">por nombre</option>
 	  				<option value="sexo">por genero</option>
@@ -99,8 +99,8 @@ fieldset {
 	 		</select>
 	 		</div>
 	 		
-	 		<div class="col-3 justify-content-center">
-	 			 <button type="button" onclick="filtrar()">Buscar</button> 
+	 		<div class="col-3 justify-content-center" class="btn btn-outline-primary">
+	 			 <button type="button" class="btn btn-outline-primary"onclick="filtrar()">Buscar</button> 
 	 		</div>
 	 		
 	 		<div class="col-1"></div>
