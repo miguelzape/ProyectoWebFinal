@@ -47,7 +47,7 @@ public class LoginServlet extends HttpServlet {
 				borrar (request, response);
 			}
 			else if (accion.equalsIgnoreCase("ordenar")) {
-				ordenar (request, response);
+				filtrar (request, response);
 			}
 			else if (accion.equalsIgnoreCase("filtrar")) {
 				filtrar (request, response);
@@ -86,21 +86,21 @@ public class LoginServlet extends HttpServlet {
 	//	      el parameter 'listaUsuarios' (List<User>) con una lista de usuarios ordenados.
 	//	      el parameter 'sentido' (String) ' ASC' o ' DESC' que es el proximo sentido en caso de reordenar por el mismo campo
 	//	      el parameter 'anterior' (String) Es el campo por el que acaba de ordenar 
-	private void ordenar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		String orden=request.getParameter("orden")!=null?request.getParameter("orden"):"nombre";
-		String sentido = orden.contains("ASC") ? " DESC" : " ASC";
-		int pos = orden.indexOf(" ");
-		
-		String anterior=(pos>0)?orden.substring(0, pos):orden; 
-		
-		String traza = "Se recibe ordenar por: " + anterior + " en orden contrario a"+sentido;
-		logger.trace(traza);
-
-		UserDao udao= new UserDao();
-		request.setAttribute("listaUsuarios", udao.getUsersOrdenados(orden));
-		RequestDispatcher rd = request.getRequestDispatcher("tablaUsers.jsp?sentido="+sentido+"&anterior="+anterior);
-		rd.forward(request, response);
-	}
+//	private void ordenar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+//		String orden=request.getParameter("orden")!=null?request.getParameter("orden"):"nombre";
+//		String sentido = orden.contains("ASC") ? " DESC" : " ASC";
+//		int pos = orden.indexOf(" ");
+//		
+//		String anterior=(pos>0)?orden.substring(0, pos):orden; 
+//		
+//		String traza = "Se recibe ordenar por: " + anterior + " en orden contrario a"+sentido;
+//		logger.trace(traza);
+//
+//		UserDao udao= new UserDao();
+//		request.setAttribute("listaUsuarios", udao.getUsersOrdenados(orden));
+//		RequestDispatcher rd = request.getRequestDispatcher("tablaUsers.jsp?sentido="+sentido+"&anterior="+anterior);
+//		rd.forward(request, response);
+//	}
 	
 	// necesita el paremeter 'campo' (String) Es el campo por el que se filtra
 	// necesita el paremeter 'valor' (String) Es el valor que se busca en el campo anterior
@@ -109,18 +109,15 @@ public class LoginServlet extends HttpServlet {
 
 	
 	private void filtrar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		String orden=request.getParameter("orden")!=null?request.getParameter("orden"):"nombre";
 		String campo=request.getParameter("campo")!=null?request.getParameter("campo"):"";
 		String valor=request.getParameter("valor")!=null?request.getParameter("valor"):"";
-//		response.getWriter().append("<H1>Filtrado. campo= "+campo+" valor= "+valor+"</H1>");
-		
-		String orden=request.getParameter("orden")!=null?request.getParameter("orden"):"nombre";
 		String sentido = orden.contains("ASC") ? " DESC" : " ASC";
 		int pos = orden.indexOf(" ");
-		
 		String anterior=(pos>0)?orden.substring(0, pos):orden; 
 		
-//		logger.trace("Se recibe ordenar por: " + anterior + " en orden contrario a"+sentido);
-		logger.trace("Se recibe filtrar por: " + campo + " con el valor "+valor);
+		logger.trace("Se llama a filtrar con parametros. orden= "+orden+" campo= "+campo+" valor= "+valor);
+	
 
 		UserDao udao= new UserDao();
 		List<User> lu= udao.getUsersOrdenados(orden, campo, valor);

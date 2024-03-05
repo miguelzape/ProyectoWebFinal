@@ -33,12 +33,12 @@ public class UserDao {
 	
 	// cRud READ
 	// lee todos los usuarios y los devuelve en una lista ordenada por el 'campo'
-	public List<User> getUsersOrdenados(String campo) {
-		
-		String cadena = "from User c order by c."+campo;
-		logger.trace("DAO. Leer todos los usuarios ordenador por un campo: "+cadena);
-		return em.createQuery(cadena, User.class).getResultList();
-	}
+//	public List<User> getUsersOrdenados(String campo) {
+//		
+//		String cadena = "from User c order by c."+campo;
+//		logger.trace("DAO. Leer todos los usuarios ordenador por un campo: "+cadena);
+//		return em.createQuery(cadena, User.class).getResultList();
+//	}
 	
 	
 	// cRud READ
@@ -47,8 +47,11 @@ public class UserDao {
 	public List<User> getUsersOrdenados(String ordenCampo, String filtroCampo, String filtroValor) {
 		
 		String cadena = "from User c";
-		cadena = (filtroCampo!=null && !filtroCampo.equals("0"))?
-				 (cadena+" where c."+filtroCampo+"='"+filtroValor+"'"):cadena;
+		
+		if (filtroCampo!=null && !filtroCampo.equals("0") && filtroValor!=null && filtroValor.length()>0) {
+			cadena = (cadena+" where c."+filtroCampo+"='"+filtroValor+"'");
+		}
+		
 		cadena = (ordenCampo!=null && !ordenCampo.equals(""))?
 				 (cadena+" order by c."+ordenCampo):cadena;
 		

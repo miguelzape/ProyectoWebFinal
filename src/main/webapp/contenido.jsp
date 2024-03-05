@@ -12,7 +12,7 @@
     <meta charset="utf-8">
     <meta name="viewport">
 
-	<title>contenido</title>
+	<title>Bienvenido a WYC</title>
 	<link href="contenido.css" rel="stylesheet" type="text/css">
 	
 	<link rel="stylesheet" href="css/bootstrap.min.css">
