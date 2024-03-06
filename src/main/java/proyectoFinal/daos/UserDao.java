@@ -24,26 +24,27 @@ public class UserDao {
 		em=null;
 	}
 
-	// cRud READ
-	// lee todos los usuarios y los devuelve en una lista
+	/************************************************
+	 * cRud READ       getUsers
+	 * lee todos los usuarios y los devuelve en una lista
+	 * @return List<User> con la lista de usuarios leida
+	 ************************************************/
 	public List<User> getUsers() {
 		logger.trace("DAO. Leer todos los usuarios");
 		return em.createQuery("from User", User.class).getResultList();
 	}
 	
-	// cRud READ
-	// lee todos los usuarios y los devuelve en una lista ordenada por el 'campo'
-//	public List<User> getUsersOrdenados(String campo) {
-//		
-//		String cadena = "from User c order by c."+campo;
-//		logger.trace("DAO. Leer todos los usuarios ordenador por un campo: "+cadena);
-//		return em.createQuery(cadena, User.class).getResultList();
-//	}
 	
-	
-	// cRud READ
-	// lee todos los usuarios y los devuelve en una lista ordenada por el 'ordenCampo'
-	// y filtrada por 'filtroCampo' con el valor 'filtroValor) 
+	/*************************************************
+	 * cRud READ       getUsersOrdenados
+	 *  Ordena y/o filtra la busqueda
+	 *  lee todos los usuarios y los devuelve en una lista ordenada por el 'ordenCampo'
+	 *  y filtrada por 'filtroCampo' con el valor 'filtroValor) 
+	 * @param ordenCampo. campo por el que se ordena
+	 * @param filtroCampo. campo por el que se filtra
+	 * @param filtroValor. valor que se busca el el campo 'filtroCampo'
+	 * @return List<User> con la lista de usuarios leida
+	 ************************************************/
 	public List<User> getUsersOrdenados(String ordenCampo, String filtroCampo, String filtroValor) {
 		
 		String cadena = "from User c";
@@ -59,15 +60,14 @@ public class UserDao {
 		return em.createQuery(cadena, User.class).getResultList();
 	}
 
-	/**
-	 * Esta funcion devuelve el objeto 'User' que concuerde con el usuario y clave
-	 * facilitados en caso de no exister ese usuario se devuelve un nul
-	 * 
+	/************************************************
+	 *  cRud READ       validarUser
+	 * Esta funcion devuelve el objeto 'User' que coincida con el usuario y clave
+	 * facilitados en caso de no existir se devuelve un null
 	 * @param usuario
 	 * @param clave
-	 * @return Devuelve un objeto de tipo User
-	 */
-	//cRud READ
+	 * @return User. Devuelve un objeto de tipo User 
+	 ************************************************/
 	public User validarUser(String usuario, String clave) {
 		logger.trace("DAO. Validar si el usuario y clave son validos");
 		
@@ -88,13 +88,23 @@ public class UserDao {
 		return null;
 	}
 	
-	//cRud READ
+	/************************************************
+	 * cRud READ          getUser
+	 * lee un usuario cuyo numero de id sea el que se para por parametro
+	 * @param id. Un long con el id del usuario que se busca
+	 * @return User Devuelve un objeto de tipo User, o un null si no se encuentra 
+	 ************************************************/
 	public User getUser(long id) {
 	logger.trace("DAO. Leer un usuario buscando por su id= "+id);
 	   return em.find(User.class, id);
 	}
 
-	//cRud READ
+	
+	/************************************************
+	 * cRud READ           existUsuario
+	 * @param usuario. el usuario que se quiere comprobar si ya existe
+	 * @return boolean. Devuelve true si existe el usuario buscado y false en caso contrario
+	 ************************************************/
 	public boolean existUsuario(String usuario) {
 		logger.trace("DAO. Comprobar si existe el usuario= "+usuario);
 		
@@ -103,8 +113,11 @@ public class UserDao {
 		return (query.getResultList().size()) > 0;
 
 	}
-
-	//Crud CREATE
+	
+	/*************************************************
+	 * Crud CREATE     putUser
+	 * @param User. El usuario que se añade a la base de datos
+	 **************************************************/
 	public void putUser(User u) {
 		logger.trace("DAO. Crear un usuario nuevo= "+u.getUsuario());
 		em.getTransaction().begin();
@@ -116,8 +129,11 @@ public class UserDao {
 			e.printStackTrace();
 		}
 	}
-
-	//cruD DELETE
+	
+	/*************************************************
+	 * cruD DELETE     deleteUser
+	 * @param Long. El id que identifica al usuario a borrar
+	 **************************************************/
 	public void deleteUser(long id) {
 		logger.trace("DAO. Eliminar un usuario usando su id= "+id);
 		try {
@@ -132,7 +148,10 @@ public class UserDao {
 		}
 	}
 	
-	//crUd UPDATE
+	/*************************************************
+	 * crUd UPDATE     editUser
+	 * @param User. El objeto 'User' que se va a sustituir en la base de datos
+	 **************************************************/
 	public void editUser(User user) {
 		logger.trace("DAO. Editar un usuario= "+user.getUsuario());
 		try {

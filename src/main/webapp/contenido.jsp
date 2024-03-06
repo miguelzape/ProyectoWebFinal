@@ -64,7 +64,7 @@ Propiedades pro = new Propiedades();
 				&clave=<%=u.getClave()%>
 				&id=<%=u.getIdUsuario()%>">Gestion de usuario</a><%}
 	  else{ 
-	 %><a href="LoginServlet?accion=ordenar">Gestion de usuarios</a><%}%>
+	 %><a href="LoginServlet?accion=filtrar">Gestion de usuarios</a><%}%>
        <a href="<%=pro.leerProper("Contenido_Enlace_1")%>"><%=pro.leerProper("Contenido_Texto_Enlace_1")%></a>
        <a href="<%=pro.leerProper("Contenido_Enlace_2")%>"><%=pro.leerProper("Contenido_Texto_Enlace_2")%></a>
        <a href="javascript:confirmarLogOut()"><%=pro.leerProper("Contenido_Texto_Enlace_LogOut")%></a>

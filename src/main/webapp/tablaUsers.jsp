@@ -48,7 +48,7 @@ fieldset {
 	}
 	
 	function ordenar(campo, sentido, anterior) {
-	    var enlace=("LoginServlet?accion=ordenar&orden="+campo);
+	    var enlace=("LoginServlet?accion=filtrar&orden="+campo);
 	    enlace = (campo==anterior) ? (enlace+sentido) : (enlace+" ASC");
 		window.location.href = enlace;
 	}
@@ -84,13 +84,13 @@ fieldset {
 				<h3><%=pro.leerProper("TablaUsers_Cabeza")%></h3>
 			</div>
 		</div>
-		<div class="row mt-3">
-			
 		
+		<div class="row mt-3">
+		<div class="col-2"></div>
 			<div class="col-4 justify-content-center">
 				Valor<input type="text" class="btn btn-outline-primary" name="filtrovalor" id="filtrovalor" maxlength="30" size="30" value="">
 			</div>
-			<div class="col-4 justify-content-center">
+			<div class="col-2 justify-content-center">
 			Filtro<select name="filtrocampo" id="filtrocampo" class="btn btn-outline-primary">
 					<option value="0">No filtrar</option>
 					<option value="nombre">por nombre</option>
@@ -99,11 +99,11 @@ fieldset {
 	 		</select>
 	 		</div>
 	 		
-	 		<div class="col-3 justify-content-center" class="btn btn-outline-primary">
+	 		<div class="col-2 justify-content-center" class="btn btn-outline-primary">
 	 			 <button type="button" class="btn btn-outline-primary"onclick="filtrar()">Buscar</button> 
 	 		</div>
 	 		
-	 		<div class="col-1"></div>
+	 		<div class="col-2"></div>
 		</div>
 
 		<div class="row mt-3">
@@ -114,7 +114,6 @@ fieldset {
 					<tr>
 						<th></th>
 						<th></th>
-						<!--  th><a href="LoginServlet?accion=ordenar&orden=usuario">Usuario</a></th-->
 						<th><a href="javascript:ordenar('usuario','<%=sentido%>','<%=anterior%>')">Usuario</a></th>
 						<th><a href="javascript:ordenar('nombre','<%=sentido%>','<%=anterior%>')">Nombre</a></th>
 						<th><a href="javascript:ordenar('apellidos','<%=sentido%>','<%=anterior%>')">Apellidos</a></th>

@@ -46,9 +46,6 @@ public class LoginServlet extends HttpServlet {
 			if (accion.equalsIgnoreCase("borrar")) {
 				borrar (request, response);
 			}
-			else if (accion.equalsIgnoreCase("ordenar")) {
-				filtrar (request, response);
-			}
 			else if (accion.equalsIgnoreCase("filtrar")) {
 				filtrar (request, response);
 			}
@@ -81,33 +78,12 @@ public class LoginServlet extends HttpServlet {
 			
 	}
 		
-	// necesita el paremeter 'orden' (String) Es el campo por el que se ordena + (opcional) " ASC" o " DESC" 
-	// devuelve a 'tablaUsers.jsp'
-	//	      el parameter 'listaUsuarios' (List<User>) con una lista de usuarios ordenados.
-	//	      el parameter 'sentido' (String) ' ASC' o ' DESC' que es el proximo sentido en caso de reordenar por el mismo campo
-	//	      el parameter 'anterior' (String) Es el campo por el que acaba de ordenar 
-//	private void ordenar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-//		String orden=request.getParameter("orden")!=null?request.getParameter("orden"):"nombre";
-//		String sentido = orden.contains("ASC") ? " DESC" : " ASC";
-//		int pos = orden.indexOf(" ");
-//		
-//		String anterior=(pos>0)?orden.substring(0, pos):orden; 
-//		
-//		String traza = "Se recibe ordenar por: " + anterior + " en orden contrario a"+sentido;
-//		logger.trace(traza);
-//
-//		UserDao udao= new UserDao();
-//		request.setAttribute("listaUsuarios", udao.getUsersOrdenados(orden));
-//		RequestDispatcher rd = request.getRequestDispatcher("tablaUsers.jsp?sentido="+sentido+"&anterior="+anterior);
-//		rd.forward(request, response);
-//	}
-	
+	// necesita el paremeter 'orden' (String) Es el campo por el que se ordena.
+	//		puede incluir el sentido " ASC" o " DESC"
 	// necesita el paremeter 'campo' (String) Es el campo por el que se filtra
 	// necesita el paremeter 'valor' (String) Es el valor que se busca en el campo anterior
 	// devuelve a 'tablaUsers.jsp'
 	//	      el parameter 'listaUsuarios' (List<User>) con una lista de usuarios.
-
-	
 	private void filtrar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		String orden=request.getParameter("orden")!=null?request.getParameter("orden"):"nombre";
 		String campo=request.getParameter("campo")!=null?request.getParameter("campo"):"";
