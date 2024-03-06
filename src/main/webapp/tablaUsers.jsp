@@ -100,7 +100,7 @@ fieldset {
 	 		</div>
 	 		
 	 		<div class="col-2 justify-content-center" class="btn btn-outline-primary">
-	 			 <button type="button" class="btn btn-outline-primary"onclick="filtrar()">Buscar</button> 
+	 			 <button type="button" class="btn btn-outline-primary"onclick="filtrar()">Filtrar</button> 
 	 		</div>
 	 		
 	 		<div class="col-2"></div>
