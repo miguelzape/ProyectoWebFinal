@@ -4,7 +4,6 @@
 <html lang="es-ES">
 <head>
 	<meta charset="utf-8">
-	<link rel="stylesheet" href="userdata.css">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<script src="js/bootstrap.bundle.min.js"></script>
 	<script type="text/javascript">
@@ -35,6 +34,8 @@
 </head>
 <body>
 <jsp:include page="cabecera.html"></jsp:include>
+<div class="container">
+		
 <%   
 	   String p_user = request.getParameter("usuario") != null ? request.getParameter("usuario"):"";
 	   boolean modificar = (p_user.length() > 3); // true= modificar false=crear
@@ -56,20 +57,20 @@
 	   String retorno = request.getParameter("retorno")!=null?request.getParameter("retorno"):"ninguno";
 
 %>
+	    <div class="row">
+				<div class="col text-center">
+				    <%if (modificar){ %>
+				    	<h3>Modificar usuario</h3>
+				    <%}else{ %>
+				    	<h3>Crear usuario</h3>
+				    <%}%>
+				 </div>
+		</div>
 
-    <div class="bg-amarillo">
-    
-    <%if (modificar){ %>
-    	<h3>Modificar usuario</h3>
-    <%}else{ %>
-    	<h3>Crear usuario</h3>
-    <%}%>
-
-
-	<form name="formulario1" action="LoginServlet?accion=
+	<form  name="formulario1" action="LoginServlet?accion=
 	<% if (modificar){%>modificar<%}else{%>nuevo<%}%>&id=<%=p_id%>&retorno=<%=retorno%>" 
 	onsubmit="return validarForm()" method="post">
-	<table align="center" cellpadding = "10">
+	<table class="bg-info bg-gradient"  align="center" cellpadding = "10">
 	
 		
 <!--		Letra: <input type="text" id="letra" required="true" name="letra" size="3" maxlength="1" autofocus>-->
@@ -162,7 +163,7 @@
 	
 </table>
 </form>
-</div>
     <jsp:include page="piepagina.html"></jsp:include>
+    </div>
 </body>
 </html>
