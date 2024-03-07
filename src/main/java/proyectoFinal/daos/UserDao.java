@@ -45,19 +45,27 @@ public class UserDao {
 	 * @param filtroValor. valor que se busca el el campo 'filtroCampo'
 	 * @return List<User> con la lista de usuarios leida
 	 ************************************************/
-	public List<User> getUsersOrdenados(String ordenCampo, String filtroCampo, String filtroValor) {
+	 public List<User> getUsersOrdenados(String ordenCampo, String filtroCampo, String filtroValor) {
 		
 		String cadena = "from User c";
 		
-		if (filtroCampo!=null && !filtroCampo.equals("0") && filtroValor!=null && filtroValor.length()>0) {
-			cadena = (cadena+" where c."+filtroCampo+"='"+filtroValor+"'");
+		boolean hayFiltro = filtroCampo!=null && !filtroCampo.equals("0") && filtroValor!=null && filtroValor.length()>0;
+		boolean hayOrden = ordenCampo!=null && !ordenCampo.equals("");
+		
+		if (hayFiltro) {
+			cadena = cadena + " where c."+filtroCampo+"=?1";
+		}
+		if (hayOrden) {
+			cadena = cadena + " order by c."+ordenCampo;
 		}
 		
-		cadena = (ordenCampo!=null && !ordenCampo.equals(""))?
-				 (cadena+" order by c."+ordenCampo):cadena;
+		TypedQuery<User> query = em.createQuery(cadena, User.class);
+		if (hayFiltro) {
+			query.setParameter(1, filtroValor);
+		}
 		
-		logger.trace("DAO. Leer usuarios filtrados por un campo: "+cadena);
-		return em.createQuery(cadena, User.class).getResultList();
+		logger.trace("DAO. Leer usuarios filtrados u ordenados: "+cadena);
+		return query.getResultList();
 	}
 
 	/************************************************
