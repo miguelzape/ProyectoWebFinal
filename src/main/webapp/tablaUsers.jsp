@@ -70,9 +70,17 @@ fieldset {
 	Propiedades pro = new Propiedades();
 	String sentido = request.getParameter("sentido") != null ? request.getParameter("sentido") : " ASC";
 	String anterior = request.getParameter("anterior") != null ? request.getParameter("anterior") : "";
-	
+		
 	String campoFiltrar = (String) request.getAttribute("campoFiltrar");
+	if (campoFiltrar == null){
+		campoFiltrar = "0";
+	}
+	
 	String valorFiltrar = (String) request.getAttribute("valorFiltrar");
+	if (valorFiltrar == null){
+		valorFiltrar = "";
+	}
+
 	%>
 	<div class="container">
 		
