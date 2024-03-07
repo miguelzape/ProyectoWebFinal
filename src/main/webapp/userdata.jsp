@@ -34,7 +34,7 @@
 </head>
 <body>
 <jsp:include page="cabecera.html"></jsp:include>
-<div class="container">
+<div class="container" style="background-color: #fcd6b0;">
 		
 <%   
 	   String p_user = request.getParameter("usuario") != null ? request.getParameter("usuario"):"";

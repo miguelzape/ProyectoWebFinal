@@ -36,7 +36,6 @@ fieldset {
 </style>
 
 <script type="text/javascript">
-
 	function borradoSeguro(number) {
 		//var x = document.forms.myForm;
 		var mensaje = confirm("¿Seguro que quiere borrar este usuario?");
@@ -48,23 +47,18 @@ fieldset {
 	}
 	
 	function ordenar(campo, sentido, anterior) {
-	    var enlace=("LoginServlet?accion=filtrar&orden="+campo);
+		var campoFiltro = document.getElementById('filtrocampo').value;
+ 		var valorFiltro = document.getElementById('filtrovalor').value;
+	    var enlace=("LoginServlet?accion=filtrar&campo="+campoFiltro+"&valor="+valorFiltro+"&orden="+campo);
 	    enlace = (campo==anterior) ? (enlace+sentido) : (enlace+" ASC");
 		window.location.href = enlace;
 	}
 	
-	function filtrar() {
-		
- 		var campo = document.getElementById('filtrocampo').value;
- 		var valor = document.getElementById('filtrovalor').value;
-		
- 		window.location.href = "LoginServlet?accion=filtrar&campo="+campo+"&valor="+valor;
-
+	function borrarFiltro(){
+		document.getElementById('filtrocampo').value = "0";
+ 		document.getElementById('filtrovalor').value = "";
 	}
-	
 </script>
-
-
 
 
 </head>
@@ -76,6 +70,9 @@ fieldset {
 	Propiedades pro = new Propiedades();
 	String sentido = request.getParameter("sentido") != null ? request.getParameter("sentido") : " ASC";
 	String anterior = request.getParameter("anterior") != null ? request.getParameter("anterior") : "";
+	
+	String campoFiltrar = (String) request.getAttribute("campoFiltrar");
+	String valorFiltrar = (String) request.getAttribute("valorFiltrar");
 	%>
 	<div class="container">
 		
@@ -88,19 +85,25 @@ fieldset {
 		<div class="row mt-3">
 		<div class="col-2"></div>
 			<div class="col-4 justify-content-center">
-				Valor<input type="text" class="btn btn-outline-primary" name="filtrovalor" id="filtrovalor" maxlength="30" size="30" value="">
+				Valor<input type="text" class="btn btn-outline-primary" name="filtrovalor" 
+				      id="filtrovalor" value="<%=valorFiltrar%>" maxlength="30" size="30" value="">
 			</div>
 			<div class="col-2 justify-content-center">
 			Filtro<select name="filtrocampo" id="filtrocampo" class="btn btn-outline-primary">
 					<option value="0">No filtrar</option>
-					<option value="nombre">por nombre</option>
-	  				<option value="sexo">por genero</option>
-	  				<option value="rol">por rol</option>
+					<option value="nombre" <% if (campoFiltrar.equalsIgnoreCase("nombre")){%> 
+					        selected="selected" <%}%>>por nombre</option>
+	  				<option value="sexo" <% if (campoFiltrar.equalsIgnoreCase("sexo")){%> 
+	  				        selected="selected" <%}%>>por genero</option>
+	  				<option value="rol" <% if (campoFiltrar.equalsIgnoreCase("rol")){%> 
+	  				        selected="selected" <%}%>>por rol</option>
+  				
 	 		</select>
 	 		</div>
 	 		
 	 		<div class="col-2 justify-content-center" class="btn btn-outline-primary">
-	 			 <button type="button" class="btn btn-outline-primary"onclick="filtrar()">Filtrar</button> 
+	 			 <button type="button" class="btn btn-outline-primary" onclick="ordenar('nombre','<%=sentido%>','<%=anterior%>')">Filtrar</button>
+	 			 <button type="button" class="btn btn-outline-primary" onclick="borrarFiltro()">Borrar filtro</button>  
 	 		</div>
 	 		
 	 		<div class="col-2"></div>
@@ -122,7 +125,7 @@ fieldset {
 						<th><a href="javascript:ordenar('email','<%=sentido%>','<%=anterior%>')">E-mail</a></th>
 						<th><a href="javascript:ordenar('telefono','<%=sentido%>','<%=anterior%>')">Telefono</a></th>
 						<th><a href="javascript:ordenar('nacimiento','<%=sentido%>','<%=anterior%>')">Nacimiento</a></th>
-						<th><a href="javascript:ordenar('rol','<%=sentido%>','<%=anterior%>')">Tipo</a></th>
+						<th><a href="javascript:ordenar('rol','<%=sentido%>','<%=anterior%>')">Rol</a></th>
 					</tr>
 
 					<%

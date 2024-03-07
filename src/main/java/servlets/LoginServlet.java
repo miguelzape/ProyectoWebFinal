@@ -69,7 +69,7 @@ public class LoginServlet extends HttpServlet {
 			
 		String Cadenaid=request.getParameter("id");
 		Long id=Long.parseLong(Cadenaid);
-		//System.out.println("El id que se quiere borrar es "+id);
+		logger.trace("El id que se quiere borrar es "+id);
 		UserDao udao= new UserDao();
 		udao.deleteUser(id);
 		request.setAttribute("listaUsuarios", udao.getUsers());
@@ -98,6 +98,8 @@ public class LoginServlet extends HttpServlet {
 		UserDao udao= new UserDao();
 		List<User> lu= udao.getUsersOrdenados(orden, campo, valor);
 		request.setAttribute("listaUsuarios", lu);
+		request.setAttribute("campoFiltrar", campo);
+		request.setAttribute("valorFiltrar", valor);
 		RequestDispatcher rd = request.getRequestDispatcher("tablaUsers.jsp?sentido="+sentido+"&anterior="+anterior);
 		rd.forward(request, response);
 		
@@ -120,13 +122,16 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		//HttpSession sesion = request.getSession();
+		String usuarioSesion = request.getSession().getId();
 		String accion=request.getParameter("accion");
 		if (accion == null) {
 			response.getWriter().append("<H1>Llamada a LoginServlet incompleta</H1>");
 		} 
 		else if (accion.equalsIgnoreCase("login")) {
 			logIn (request, response);
+		} 
+		else if (!sesiones.keySet().contains(usuarioSesion)){
+			response.getWriter().append("<H1>Accion no permitida para usuarios no logeados</H1>");
 		}
 		else if (accion.equalsIgnoreCase("nuevo")) {
 			nuevo (request, response);
@@ -134,7 +139,6 @@ public class LoginServlet extends HttpServlet {
 		else if (accion.equalsIgnoreCase("modificar")) {
 			modificar (request, response);
 		}
-		
 		else {
 			response.getWriter().append("<H1>El metodo doPost ha recibido una accion inesperada</H1>");
 		}
@@ -207,7 +211,6 @@ public class LoginServlet extends HttpServlet {
 		String fecha=request.getParameter("fecha")!=null?request.getParameter("fecha"):"";
 		String rol=request.getParameter("tipo")!=null?request.getParameter("tipo"):"";
 		// 1985-01-03 año-mes-dia. asi se recibe
-		// System.out.println("la fecha recibida es= "+fecha); 
 		Date f=Utils.string2ToDate(fecha);
 		
 		User u = new User(idusuario,clave,nombre,apellidos,dni,genero,mail,tele,f,rol);

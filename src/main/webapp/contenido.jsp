@@ -69,6 +69,8 @@ Propiedades pro = new Propiedades();
        <a href="<%=pro.leerProper("Contenido_Enlace_2")%>"><%=pro.leerProper("Contenido_Texto_Enlace_2")%></a>
        <a href="javascript:confirmarLogOut()"><%=pro.leerProper("Contenido_Texto_Enlace_LogOut")%></a>
   </nav>
+<%--   <%=u.getNombre()+" "+u.getApellidos()%> --%>
+  
 <!--   <blockquote> -->
 <div class="col-12 col-md-6 col-lg-3">
      <img src="imagen2.jpg" height="450px" align="left" >
