@@ -57,6 +57,8 @@ fieldset {
 	function borrarFiltro(){
 		document.getElementById('filtrocampo').value = "0";
  		document.getElementById('filtrovalor').value = "";
+ 		var enlace=("LoginServlet?accion=filtrar&campo=nombre ASC");
+ 		window.location.href = enlace;
 	}
 </script>
 
