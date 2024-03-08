@@ -106,17 +106,17 @@
 		</tr>
 		<tr>
 			<td>Usuario</td>
-			<td>*<input type="text" <%if (modificar) {%> disabled="disabled" <%}%>
+			<td><span style="color:blue">*</span><input type="text" <%if (modificar) {%> disabled="disabled" <%}%>
 			     name="idusuario" required="true" maxlength="15" minlength="4" tabindex="5" value="<%=p_user%>"></td>
 		</tr>
 		<tr>
 			<td>Contraseña</td>
-			<td>*<input type="password" name="password" required="true"
+			<td><span style="color:blue">*</span><input type="password" name="password" required="true"
 			     maxlength="15" minlength="4" tabindex="6" value="<%=p_clav%>"></td>
 		</tr>
 		<tr>
 			<td>Contraseña</td> 
-			<td>*<input type="password" name="password2" required="true"
+			<td><span style="color:blue">*</span><input type="password" name="password2" required="true"
 			     maxlength="15" minlength="4" tabindex="7" value="<%=p_clav%>"/> verificación </td>
 		</tr>
 		<tr>
@@ -136,7 +136,7 @@
 		</tr>
 		<tr>
 			<td>Rol</td> 
-			<td><select name="tipo" id="tipo" tabindex="11">
+			<td><span style="color:blue">*</span><select name="tipo" id="tipo" tabindex="11">
 				<option value="0">Elija una opcion</option>
   				<option value="User" <% 
   					if (p_rol.equalsIgnoreCase("user")){

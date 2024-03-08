@@ -32,7 +32,7 @@
 
 
 <body> 
-<jsp:include page="cabecera.html"></jsp:include>
+
 <div class="container">
 
 
